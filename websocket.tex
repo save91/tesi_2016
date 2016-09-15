@@ -1,6 +1,6 @@
 \chapter{Websocket}
 \label{chap:websocket}
-
+\nocite{html5}
 Nel capitolo \ref{chap:scelta} abbiamo parlato di come e con quali tecnologie sono state implementate le API REST di proximity system.  
 Queste API danno la possibilità a chiunque di implementare un proprio client per qualsiasi dispositivo. 
 Il problema di questi servizi è che che sono di tipo pull, ovvero dev'essere il client a chiedere informazioni al server. 
@@ -13,17 +13,19 @@ Queste non sono altro che un canale di comunicazione full-duplex operante su una
 \label{sec:real-time}
 Prima di andare nel dettaglio nella specifica WebSocket, vediamo quali sono e come funzionano i principali "hack" utilizzati per simulare un'applicazione real-time con il protocollo HTTP.
 
-Nei tradizionali siti web quando un server HTTP riceve una richiesta, il server genera la pagina richiesta personalizzata per il client la inoltra e il client poi fa il render della risposta e la visualizza a video.
-Esistono molti casi, come la disponibilità di biglietti per un evento, dati azionari etc. in cui i dati inviati dal server potrebbe già essere deprecati nel momento in cui il client fa il render della pagina. 
-Per avere i dati aggiornati è necessario aggiornare i dati continuamente, ad esempio manualmente, anche se ovviamente non rappresente una soluzione ottimale.
+Nei tradizionali siti web quando un server HTTP riceve una richiesta, il server genera la pagina richiesta personalizzata per il client la inoltra e il client che poi fa il render della risposta e la visualizza a video.
+Esistono molti casi, come la disponibilità di biglietti per un evento, dati azionari etc. in cui i dati inviati dal server potrebbero già essere deprecati nel momento in cui il client fa il render della pagina. 
+Per avere i dati aggiornati è necessario aggiornare i dati continuamente, ad esempio manualmente, anche se ovviamente non rappresenta una soluzione ottimale.
 
-Una delle tecniche di invio di dati push lato server è "Comet".
-Quest'ultima ritarda la risposta di una richiesta HTTP per inviare messaggi ai client.
+Comet\index{Comet} è un modello per le web application nel quale una particolare gestione 
+delle richieste HTTP permette al web server di inviare notifiche push al browser, senza che il browser faccia una richiesta specifica.
+Esistono diverse tecniche che permettono di implementare questo modello basato sugli eventi. 
 
-La più diffusa è invece il polling, che consiste nell'invio di richieste HTTP a intervalli regolari con una risposta immediata da parte del server. 
+La più diffusa tra le tecniche comet è il polling, che consiste nell'invio di richieste HTTP a intervalli regolari con una risposta immediata da parte del server. 
 Questa tecnica è efficiente nei casi in cui si conosce a prescindere ogni quanto tempo i dati verranno aggiornati dal server.
 Come è facile immaginare non è sempre facile prevedere con quale cadenza i dati verranno aggiornati, causando un numero elevato di richieste non necessarie.
 Quello che ne deriva è l'apertura e la chiusura di un alto numero di connessioni e quindi l'utilizzo di risorse non strettamente necessarie.
+
 Una possibile soluzione è l'implementazione del long-polling, dove il client invia una richiesta al server che risponderà soltanto se i dati sono stati aggiornati e farà scadere la richiesta altrimenti. È importante far notare che se il numero di aggiornamenti è alto, non si hanno vantaggi rispetto al polling tradizionale.
 \begin{figure}[htpb!]
   \centering
@@ -61,14 +63,14 @@ In quanto tale, realizzare una webapp con il modello publish/subscribe attravers
 Ian Hickson, uno dei principali responsabili della specifica HTML5, inizialmente definì le WebSocket nella sezione specifica dedicata ai metodi di comunicazione con il nome di "TCPConnection".
 Questa specifica si è evoluta poi a tal punto da far definire le WebSocket in una specifica indipendente come la geolocalizzazione, i Web Worker etc. per mantenere la discussione focalizzata.
 
-Il protocollo WebSocket viene descritto nel RFC 6455 ed è diviso in due parti: una che descrive l'handshake e una per il trasferimento dei dati.
+Il protocollo WebSocket viene descritto nel RFC 6455\cite{RFC6455} ed è diviso in due parti: una che descrive l'handshake e una per il trasferimento dei dati.
 
 Una volta che il client e il server hanno completato l'handshake, se è andato a buon fine, allora i due possono iniziare a comunicare.
 Quello che si crea è un canale di comunicazione full-duplex dove sia il client che il server, indipendentemente l'uno dall'altro, possono inviare dei dati.
 
 Dopo l'handshake, i dati che vengono scambiati prendono il nome di "messaggi". 
 A livello fisico, un messaggio è composto da uno o più frame.
-Quindi un messaggio WebSocket non corrisponde necessariamente ad un particolare frame, in quanto il messaggio può essere frammentato e e poi ricomposto da qualsiasi intermediario tra le due parti.
+Quindi un messaggio WebSocket non corrisponde necessariamente ad un particolare frame, in quanto il messaggio può essere frammentato e poi ricomposto da qualsiasi intermediario tra le due parti.
 
 Un frame ha associato un determinato tipo. 
 Ogni frame dello stesso messaggio contiene lo stesso tipo di dati.
@@ -76,7 +78,7 @@ Possiamo identificare dei dati di tipo testo(UTF-8), dati binari e frame di cont
 La versione corrente del protocollo definisce sei tipi di frame e ne lascia altri dieci per future implementazioni.
 \subsection{L'handshake WebSocket}
 \label{sec:handshake}
-L'handshake è stato progettato per essere compatibile con i server basati sul protocollo HTTP, in modo tale che una singola porta possa essere utilizzata sia dai client che vogliono comunicare con il webserver sia dai client WebSocket.
+L'handshake è stato progettato per essere compatibile con i server basati sul protocollo HTTP, in modo tale che una singola porta possa essere utilizzata sia dai client che vogliono comunicare con il WebServer sia dai client WebSocket.
 Per questo motivo l'handshake è una richiesta di HTTP upgrade.
 \begin{lstlisting}[caption={client handshake}, style=javaScriptCode]
 	GET /chat HTTP/1.1
@@ -90,9 +92,9 @@ Per questo motivo l'handshake è una richiesta di HTTP upgrade.
 \end{lstlisting} 
 
 Come stabilito nel RFC 2616, i campi dell'header possono essere inviati in qualsiasi ordine.  
-Il metodo GET viene utilizzato per identificare la WebSocket corretta, sia per far in modo che domini multipli possano essere serviti da un singolo indirizzo IP e per permettere la gestione di più WebSocket in un singolo server.
+Il metodo GET viene utilizzato sia per identificare la WebSocket corretta, sia per far in modo che domini multipli possano essere serviti da un singolo indirizzo IP e per permettere la gestione di più WebSocket in un singolo server.
 
-Il client include nell'header il nome dell'host del server così come descritto in RFC2616, in modo tale che sia il client che il server
+Il client include nell'header il nome dell'host del server così come descritto in RFC2616\cite{RFC2616}, in modo tale che sia il client che il server
 possano verificare che l'host in uso sia quello corretto.
 
 Campi dell'header addizionali possono essere aggiunti  per selezionare
@@ -108,14 +110,14 @@ Il campo \emph{Origin} vieni utilizzato come contromisura per
 l'utilizzo non autorizzato del server WebSocket da script eseguiti nel browser.
 Se il server non vuole accettare una connessione da una determinata origine, 
 può scegliere di rifiutare la connessione inviando un codice di errore HTTP appropriato.
-Questo campo ha senso solo per i client che sono browser in quanto tutti gli altri possono modificarlo a loro piacimento.
+Questo campo ha senso solo per i client che sono browser, in quanto tutti gli altri possono modificarlo a loro piacimento.
 
-Adesso, il server deve dimostrare al client che ha ricevuto un messaggio di handshake e deve stare attento a non accettare richieste che non sono per le WebSocket.
+Adesso, il server deve dimostrare al client che ha ricevuto un messaggio di handshake e deve stare attento a non accettare richieste che non siano per le WebSocket.
 In modo tale da prevenire eventuali attacchi generati con un XMLHttpRequest o l'invio di dati da un form.
 
-Per dimostrare che ha ricevuto un handshake, il server deve mettere insieme due dati e metterli insieme per generare una risposta.
+Per dimostrare che ha ricevuto l'handshake corretto, il server deve mettere insieme due dati e metterli insieme per generare una risposta.
 Il primo dato viene preso dal campo \emph{Sec-WebSocket-Key}.
-il secondo è la stringa che rappresenta il GUID(Globally Unique Identifier RFC4122) "258EAFA5-E914-47DA-95CA-C5AB0DC85B11".
+il secondo è la stringa che rappresenta il GUID(Globally Unique Identifier RFC4122\cite{RFC4122}) "258EAFA5-E914-47DA-95CA-C5AB0DC85B11".
 Ad esempio, se prendiamo i dati dal handshake precedente, 
 il server deve concatenare il GUID e il \emph{Sec-WebSocket-Key} ottenendo la stringa "dGhlIHNhbXBsZSBub25jZQ==258EAFA5-E914-47DA-95CA-C5AB0DC85B11".
 Poi il server deve prendere l'hash SHA-1 di questa stringa, ovvero 
@@ -147,16 +149,13 @@ Scrivendo il codice è possibile utilizzare dei \emph{listener} asincroni per ge
 \begin{lstlisting}[caption={interfaccia WebSocket}, style=javaScriptCode]
 url = "ws://example.com/echo";
 socket = new WebSocket(url);
-
 socket.onopen = function() {
 	console.log("WebSocket aperta");
 	socket.send("Grazie per aver accettato questa WebSocket");
 }
-
 socket.onmessage = function(e) {
 	console.log(e.data);
 }	
-
 socket.onclose = function(e) {
 	console.log("connessione chiusa");
 }
@@ -168,15 +167,14 @@ Le WebSocket HTML offrono vantaggi tali da spingere Ian Hickson (Google) a dichi
 and reducing latency from 150ms (TCP round trip to set up the 
 connection plus a packet for the message) to 50ms (just the packet for the 
 message) is far more than marginal. 
-In fact, these two factors alone are enough to make WebSocket seriously interesting to Google."}\footnote{www.ietf.org/mail-archive/web/hybi/current/msg00784.html}
+In fact, these two factors alone are enough to make WebSocket seriously interesting to Google."}\footnote{\url{www.ietf.org/mail-archive/web/hybi/current/msg00784.html}}
   
 Per illustrare quanto possono essere efficienti le WebSocket,
 andremo a confrontare il traffico e la latenza di un'applicazione web prima implementata tramite polling e poi tramite WebSocket.
 
-Per evidenziare maggiormente la differenza di prestazioni 
-non prenderemo in considerazione la nostra WebApp, in cui il miglioramento delle performance è minimo, ma un'ipotetica applicazione che visualizza dati in tempo reale i dati
- di una macchina di una corsa: velocità; giri del motore; tempo del giro, posizione, km percorsi.
-Supponiamo che le 2 nostre applicazioni ricevano i dati tramite il seguente JSON:
+Dato che il miglioramento delle performance in Proximity System è minimo, 
+prenderemo in considerazione un'ipotetica applicazione che visualizza dati in tempo reale i dati di una macchina da corsa: velocità; giri del motore; tempo del giro, posizione, km percorsi.
+Supponiamo che le 2 nostre applicazioni, quella basata sul polling e qualle basata sulle WebSocket, ricevano i dati tramite il seguente JSON:
 \begin{lstlisting}[caption={JSON dati macchina}, style=javaScriptCode]
 {
 	"lap_time": "35.256", 
@@ -187,7 +185,7 @@ Supponiamo che le 2 nostre applicazioni ricevano i dati tramite il seguente JSON
 }
 \end{lstlisting} 
 
-In questo caso la quantità di dati che il server invia al client è pari al numero di caratteri presenti nel JSON, escludendo gli spazi, le tabulazioni e i ritorni a capo possiamo contare 81 caratteri e quindi 81 byte di dati.
+In questo caso la quantità di dati che il server invia al client è pari al numero di caratteri presenti nel JSON, escludendo gli spazi, le tabulazioni e i ritorni a capo che si possono omettere contiamo 81 caratteri e quindi 81 byte di dati.
 Il problema è che oltre agli 81 byte dei dati effettivi, ogni richiesta XMLHttpRequest deve considerare sia l'header inviato dal client che quello inviato dal server in risposta.
 Giusto per far un esempio, osserviamo i due header di una richiesta fatta utilizzando ProximitySystem
 \begin{lstlisting}[caption={header client}, style=javaScriptCode]
@@ -309,18 +307,18 @@ RFC 6455 & 16(Chrome) & 11.0 & ? & 12.10 & 6.0\\
 Nelle Tabelle \ref{tab:browser} e \ref{tab:mobile} è possibile vedere, rispettivamente per desktop e per mobile, il supporto dei vari browser per le diverse specifiche delle WebSocket.
 
 Quando si crea una WebApp con le WebSocket è importante prendere in considerazione anche la possibilità che esse non siano supportate dal client e quindi implementare anche una soluzione alternativa, per l'appunto, nel caso non sia possibile utilizzare le WebSocket.
-Esistono diversi framework che forniscono supporto completo sia per l'implementazione del client che del server che risolvono tutti i problemi di compatibilità che potrebbero essere presentarsi.
+Esistono diversi framework che forniscono supporto completo sia per l'implementazione del client che del server che risolvono tutti i problemi di compatibilità che potrebbero presentarsi.
 Tra i framework più popolari troviamo:
 \begin{itemize}
 \item Kaazing;
 \item LightStreamer; 
 \item Socket.io.
 \end{itemize}
-Nel capitolo successivo vedremo in dettaglio come implementare sia il client ed il server di un'applicazione real-time con Socket.io
+Nel paragrafo successivo vedremo in dettaglio come implementare sia il client ed il server di un'applicazione real-time con Socket.io
 
 \section{Socket.io}
 \label{sec:socket.io}
-Socket.io permette di sviluppare applicazione clint-server real-time, 
+Socket.io permette di sviluppare applicazione client-server real-time, 
 senza doversi preoccupare delle problematiche relative alle WebSocket.
 Ad esempio, se un client non supporta le WebSocket, socket.io implementerà lo stesso servizio con il polling, il tutto in maniera trasparente al programmatore.
 
@@ -330,7 +328,7 @@ per farne vedere sia l'utilizzo lato frontend che backend.
 \subsection{Backend}
 Le uniche dipendenze di cui ha bisogno il nostro backend sono: express e socket.io.
 Il codice è molto semplice e non ha bisogno di particolari spiegazioni.
-Il server è in ascolto sulla porta 3000 sia di connessioni http che WebSocket.
+Il server è in ascolto sulla porta 3000 sia di connessioni HTTP sia WebSocket.
 Se riceve una richiesta http risponderà con la WebApp in Angular,
 altrimenti, gestirà la WebSocket.
 \begin{lstlisting}[caption={backend chat socket.io}, style=javaScriptCode]
@@ -361,11 +359,11 @@ http.listen(port, function(){
 });
 \end{lstlisting} 
 L'unica cosa che fa il server è inviare in broadcast a tutte le socket connesse i messaggi che riceve dalle singoli connessioni.
-Se non avessimo utilizzato socket.io avremmo dovuto implementare soluzioni alternative nel caso in cui le WebSocket non fossero disponibili nel client o 
-l'handshake non andasse a buon fine, in questo caso, invece, è socket.io che si occupa di gestire tutti i possibili problemi e fornire una soluzione equivalente, in maniera trasparente al programmatore.
+Se non avessimo utilizzato Socket.io avremmo dovuto implementare soluzioni alternative nel caso in cui le WebSocket non fossero disponibili nel client o 
+l'handshake non andasse a buon fine, in questo caso, invece, è Socket.io che si occupa di gestire tutti i possibili problemi e fornire una soluzione equivalente, in maniera sempre trasparente al programmatore.
 \subsection{Frontend}
-Il frontend, molto semplicemente, invierà i messaggi scritti dall'utente tramite socket.io al server e visualizzerà a video i messaggi ricevuti dal server, il tutto, real-time.
-Per utilizzare socket.io come se fosse un servizio di Angular, 
+Il frontend, molto semplicemente, invierà i messaggi scritti dall'utente tramite Socket.io al server e visualizzerà a video i messaggi ricevuti dal server, il tutto, real-time.
+Per utilizzare Socket.io come se fosse un servizio di Angular, 
 abbiamo installato il plugin \texttt{angular-socket-io}, disponibile tramite bower e inizializzato come segue.
 \begin{lstlisting}[caption={service mySocket}, style=javaScriptCode]
 angular.module('socketApp.services.socket',[])
@@ -380,7 +378,7 @@ angular.module('socketApp.services.socket',[])
 });
 \end{lstlisting} 
 A livello di controller basta iniettare il servizio come dipendenza e si
-possono utilizzare i listener e i metodi messi a disposizione da socket.io.
+possono utilizzare i listener e i metodi messi a disposizione da Socket.io.
 Nel codice che segue semplicemente se arriva un nuovo messaggio viene aggiunto all'array di messaggi.
 \begin{lstlisting}[caption={controller mySocket}, style=javaScriptCode]
 angular.module('socketApp.controllers.home', [])
@@ -398,7 +396,7 @@ angular.module('socketApp.controllers.home', [])
   };
 });
 \end{lstlisting} 
-Questo è tutto, il codice completo dell'esempio è disponibile sul mio GitHub\footnote{https://github.com/save91/angular-chat-socket.io}.
+Questo è tutto, il codice completo dell'esempio è disponibile sul mio GitHub\footnote{\url{https://github.com/save91/angular-chat-socket.io}}.
 
 
 
