@@ -12,7 +12,7 @@ Per sviluppare la nostra applicazione abbiamo utilizzato lo stack MEAN\index{MEA
 \item A = Angular.js: un framework per la creazione di single page application
 \item N = Node.js: un interprete javascript lato server
 \end{itemize}
-Lo stack MEAN è un sostituto dello stack LAMP\index{LAMP} (Linux, Apache, MySQL, PHP/Perl/Python/P…) molto popolare per la costrizione di applicazione web negli anni 90.
+Lo stack MEAN è un sostituto dello stack LAMP\index{LAMP} (Linux, Apache, MySQL, PHP/Perl/Python/P…) molto popolare per la costruzione di applicazione web negli anni 90.
 
 In questa tesi non descriveremo Angular perché verrà fatto nell'elaborato di Marco in cui descriverà il frontend. 
 Andiamo quindi a costruire le REST API che non hanno una user interface, ma sono la nostra base per qualsiasi tipo di applicazione, come un sito web, un'app Android, iOS o Ubuntu Touch.
@@ -110,7 +110,7 @@ i primi tre sono quelli descritti nel capitolo precedente e rappresentano il pay
 }
 \end{lstlisting}
 
-Il documento che descrive il device memorizza: il tipo, se è di output o di input, il livello dei permessi, se deve essere comandato in maniera automatica, un riferimento al GPIO ed un riferimento al beacon associato. 
+Il documento che descrive il device memorizza: il tipo, se è di output o di input; il livello dei permessi; se deve essere comandato in maniera automatica; un riferimento al GPIO ed un riferimento al beacon associato. 
 I permessi vanno da 0 a 10.
 0 identifica l'admin, più è alto il valore di permission, più utenti potranno accedere al dispositivo.
 In altre parole, un utente può accedere ad un dispositivo se e solo se il numero che identifica i permessi dell'utente(sempre da 0 a 10) è compreso tra 0 e il valore di permission del device  
@@ -184,7 +184,7 @@ Il nome della nostra applicazione è proximity-system.
 La versione è la 1.0.0. 
 Sono presenti due script: il primo serve ad avviare il webserver, i permessi di root sono necessari per utilizzare i GPIO nel raspberry; ed un secondo script per eseguire i test. 
 Poi sono segnati l'autore, la licenza e l'elenco delle dipendenze. 
-I test dell'applicazione li abbiamo scritti con frisby ed eseguiti con jasmine-node.
+I test dell'applicazione li abbiamo scritti con Frisby ed eseguiti con Jasmine-node.
 
 Una libreria particolarmente interessante è async. 
 Node.js è stato progettato per essere asincrono.

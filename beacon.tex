@@ -25,13 +25,15 @@ Se si è interessati ad utilizzare gli ibeacon, si rientra in almeno una delle s
 \item \textbf{App Developers}
 \\Se si vuole migliorare la geo-localizzazione di un'app, si può utilizzare il Core Location APIs in iOS per ricevere notifiche quando un dispositivo entra ed esce dalla regione di un beacon e per stimare la prossimità dal beacon stesso. 
 Tutto quello di cui si ha bisogno è incluso in iOS SDK.
-\item \textbf{Si vuole utilizzare un dispositivo con la tecnologia iBeacon}
-\\Se sei interessato ad utilizzare il logo di iBeacon, ma non sei un produttore di iBeacon, dovrai ottenere una licensa del logo prima di utilizzarlo.
+\item \textbf{Persone che vogliono utilizzare un dispositivo con la tecnologia iBeacon}
+\\Se si è interessati ad utilizzare il logo di iBeacon, ma non si è un produttore di iBeacon, si deve ottenere una licenza del logo prima di utilizzarlo.
 \url{https://developer.apple.com/ibeacon/}   
 \item \textbf{Persone che vogliono creare dispositivi con la tecnologia iBeacon}
-\\Se sei interessato a costruire dispositivi con iBeacon technology, avrai bisogno di ottenere una licenza da Apple prima di realizzarli. 
-Con la licenza hai l'accesso a specifiche tecniche  ed il permesso ad utilizzare il logo iBeacon. 
+\\Se si è interessati a costruire dispositivi con iBeacon technology, si deve ottenere una licenza da Apple prima di realizzarli. 
+Con la licenza si ha l'accesso a specifiche tecniche  ed il permesso ad utilizzare il logo iBeacon. 
 \end{enumerate}
+
+Passiamo ora a descrive il frame.
 Un iBeacon advertisement invia le seguenti informazioni via BLE:
 \begin{table}[htbp]
 \begin{center}
@@ -97,9 +99,13 @@ La potenza del segnale è generalmente correlata dalla distanza fra il beacon e 
 Quando un dispositivo è lontano dal beacon, la potenza del segnale sarà minore rispetto a quando è vicino. 
 Minore è la potenza del segnale, minore sarà la precisione nel calcolo della prossimità. 
 Lo stesso accade con il GPS.
-Come il dispositivo si avvicina al beacon, il segnale diventa più forte e di conseguenza migliora la precisione della distanza.
-Come per il segnale GPS, un oggetto fisico può bloccare il segnale del beacon. L'attenuazione del segnale, o semplicemente la perdita di intensità, può essere causata da molti fattori. 
-Anche il corpo umano può attenuare il segnale Bluetooth. Basta, per esempio, dare le spalle al beacon per diminuire la precisione del dispositivo nel calcolare la distanza dal beacon.\\
+Come il dispositivo si avvicina al beacon, il segnale diventa più forte e di conseguenza migliora la precisione della stima della distanza.
+Ad esempio, se ci troviamo a un metro di distanza il segnale sarà forte e la distanza dal dispositivo sarà calcolata con un errore di qualche cm.
+Altrimenti, se ci troviamo a dieci metri di distanza il segnale sarà debole e la distanza dal dispositivo sarà calcolata con l'errore di qualche metro. 
+Come per il segnale GPS, anche quello del beacon può essere ostacolato da un oggetto fisico.  
+Il corpo umano, per esempio, può attenuare il segnale Bluetooth. 
+Basta dare le spalle al beacon per diminuire la precisione del dispositivo nel calcolare la distanza dal beacon.
+
 Quando si costruisce un'applicazione che utilizza GPS o beacon, è importante prendere in considerazione la precisione.
 Il valore riportato dall'oggetto Core Location, indica il livello di incertezza, o margine di errore misurato in metri. 
 
@@ -162,7 +168,7 @@ Per eseguirla dobbiamo:
 \end{enumerate}
 Dato che il sistema circostante può influire sulla frequenza del bluetooth, è importante ripetere la procedura per ogni beacon installato. 
 \subsection{UUID}
-Un \textbf{universally unique identifier}(UUID)\index{UUID} definito in RFC 4122\cite{RFC4122} è un identificatore standard usato per la costruzione di applicazioni.
+Un \textbf{Universally Unique IDentifier}(UUID)\index{UUID} definito in RFC 4122\cite{RFC4122} è un identificatore standard usato per la costruzione di applicazioni.
 Esso è semplicemente un numero rappresentato da 128 bit.
 Il significato di ogni bit è definito nella specifica di ciascuna delle sue varianti.
 
@@ -183,7 +189,7 @@ Esistono 5 varianti di UUID:
 \end{enumerate}
 
 Se ai 128 bit togliamo i due bit che identificano RFC 4122 e i 4 che identificano la versione, abbiamo che gli UUID generati hanno 122 bit random.
-La possibilità che due UUID abbiamo lo stesso identico valore può essere calcolata utilizzando il calcolo della  probabilità(il problema del compleanno).
+La possibilità che due UUID abbiamo lo stesso identico valore può essere calcolata utilizzando il calcolo della  probabilità (il problema del compleanno).
 \begin{equation}
 p(n)\cong1-e^{-\frac{n^2}{2-2^x}}
 \end{equation}
@@ -248,9 +254,9 @@ Questo risultato è garantito da una serie di scelte tecnologiche che sono state
 Grazie a queste soluzioni, i BlueBeacon, a parità di potenza emessa dal chip radio, trasmettono un livello di potenza superiore di un fattore 2 - 4 rispetto a dispositivi concorrenti. Questo permette di ridurre la potenza emessa dal chip, con un conseguente riduzione dei consumi e, quindi, aumento della vita operativa delle batterie. Inoltre, un segnale con un livello di potenza maggiore garantisce una superiore stabilità in ricezione e un aumento della distanza di comunicazione del beacon. 
 \subsection{Trasmissione}
 La misura della distanza con i beacon è basata sul valore dell'RSSI (Received Signal Strength Indicator), ovvero della potenza del segnale RF ricevuto dallo smartphone. 
-Il segnale ricevuto risente fortemente di una serie di elementi, fra cui, ma non solo, l'orientazione e la posizione relative dello smartphone rispetto al beacon, la presenza del corpo umano, fenomeni di riflessione e diffrazione dall'ambiente (soprattutto struttire metalliche).
+Il segnale ricevuto risente fortemente di una serie di elementi, fra cui, l'orientazione e la posizione relative dello smartphone rispetto al beacon, la presenza del corpo umano, fenomeni di riflessione e diffrazione dall'ambiente (soprattutto struttire metalliche).
 Di conseguenza, il valore di RSSI non può fornire una misura esatta della distanza in un ambiente complesso (questa condizione sarebbe vera solo nel caso ideale di spazio libero), ma solo una stima approssimata della vicinanza dello smartphone dal beacon. 
-Da tenere in conto, inoltre, che l'accuratezza, è fortemente dipendente dall'intervallo di advertising. 
+Da tenere in conto, inoltre, che l'accuratezza è fortemente dipendente dall'intervallo di advertising. 
 
 La massima distanza di trasmissione (ovvero la massima distanza a cui può essere ricevuto il segnale trasmesso dal beacon) dipende da una serie di parametri. 
 Il più importante è la potenza trasmessa: maggiore è la potenza trasmessa è maggiore è la distanza, anche se non c'è una relazione di linearità fra le due grandezze, a causa dei meccanismi fisici di propagazione. 

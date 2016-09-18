@@ -6,16 +6,16 @@ Queste API danno la possibilità a chiunque di implementare un proprio client pe
 Il problema di questi servizi è che che sono di tipo pull, ovvero dev'essere il client a chiedere informazioni al server. 
 Il server non può inviare i dati aggiornati appena sono disponibili,
 ma soltanto quando un client li richiede.
-In questo capitolo andremo a vedere come risolvere questo problema il metodo di comunicazione più potente introdotto con la specifica HTML5: le WebSocket.
+In questo capitolo andremo a vedere come risolvere questo problema con il metodo di comunicazione più potente introdotto con la specifica HTML5: le WebSocket.
 Queste non sono altro che un canale di comunicazione full-duplex operante su una singola socket che permette di migliorare drasticamente sia la quantità di traffico che la latenza di tutte le applicazione web basate sulla visualizzazione di dati in tempo reale e sugli eventi.
   
 \section{Panoramica della applicazione real-time e HTTP}
 \label{sec:real-time}
 Prima di andare nel dettaglio nella specifica WebSocket, vediamo quali sono e come funzionano i principali "hack" utilizzati per simulare un'applicazione real-time con il protocollo HTTP.
 
-Nei tradizionali siti web quando un server HTTP riceve una richiesta, il server genera la pagina richiesta personalizzata per il client la inoltra e il client che poi fa il render della risposta e la visualizza a video.
+Nei tradizionali siti web quando un server HTTP riceve la richiesta, il server genera la pagina richiesta personalizzata per il client, la inoltra ed è il client che poi fa il render della risposta e la visualizza a video.
 Esistono molti casi, come la disponibilità di biglietti per un evento, dati azionari etc. in cui i dati inviati dal server potrebbero già essere deprecati nel momento in cui il client fa il render della pagina. 
-Per avere i dati aggiornati è necessario aggiornare i dati continuamente, ad esempio manualmente, anche se ovviamente non rappresenta una soluzione ottimale.
+Per avere gli ultimi dati, bisogna aggiornarli continuamente, ad esempio manualmente, anche se ovviamente non rappresenta una soluzione ottimale.
 
 Comet\index{Comet} è un modello per le web application nel quale una particolare gestione 
 delle richieste HTTP permette al web server di inviare notifiche push al browser, senza che il browser faccia una richiesta specifica.
@@ -27,13 +27,14 @@ Come è facile immaginare non è sempre facile prevedere con quale cadenza i dat
 Quello che ne deriva è l'apertura e la chiusura di un alto numero di connessioni e quindi l'utilizzo di risorse non strettamente necessarie.
 
 Una possibile soluzione è l'implementazione del long-polling, dove il client invia una richiesta al server che risponderà soltanto se i dati sono stati aggiornati e farà scadere la richiesta altrimenti. È importante far notare che se il numero di aggiornamenti è alto, non si hanno vantaggi rispetto al polling tradizionale.
+Quello in Figura \ref{fig:timing} è un esempio di long-polling in azione preso da messenger. 
+
 \begin{figure}[htpb!]
   \centering
   \includegraphics[width=1\textwidth]{timing}
   \caption{Esempio di long-polling}
   \label{fig:timing}
 \end{figure}
-Quello in Figura \ref{fig:timing} è un esempio di long-polling in azione preso da messenger. 
 
 Un'altra tecnica, che prende il nome di streaming, consiste in una connessione completa tra client e server, in cui il server mantiene la connessione aperta con un aggiornamento costante delle informazioni per un tempo indeterminato, per poi aggiornare la risposta con l'arrivo di nuovi dati, sempre mantenendo aperta la connessione.
 
@@ -115,7 +116,7 @@ Questo campo ha senso solo per i client che sono browser, in quanto tutti gli al
 Adesso, il server deve dimostrare al client che ha ricevuto un messaggio di handshake e deve stare attento a non accettare richieste che non siano per le WebSocket.
 In modo tale da prevenire eventuali attacchi generati con un XMLHttpRequest o l'invio di dati da un form.
 
-Per dimostrare che ha ricevuto l'handshake corretto, il server deve mettere insieme due dati e metterli insieme per generare una risposta.
+Per dimostrare che ha ricevuto l'handshake corretto, il server deve prendere due dati e metterli insieme per generare una risposta.
 Il primo dato viene preso dal campo \emph{Sec-WebSocket-Key}.
 il secondo è la stringa che rappresenta il GUID(Globally Unique Identifier RFC4122\cite{RFC4122}) "258EAFA5-E914-47DA-95CA-C5AB0DC85B11".
 Ad esempio, se prendiamo i dati dal handshake precedente, 
@@ -215,7 +216,7 @@ Connection: keep-alive
 
 \end{lstlisting} 
 Aggiungendo i 210 della risposta otteniamo 694 byte di dati non necessari per ogni richiesta. 
-È vero che queso è solo un esempio, e ci saranno situazioni con meni dati nell'header, ma è bene sapere che in alcuni casi le informazioni nell'header possono arrivare vino a 2000 byte.
+È vero che questo è solo un esempio, e ci saranno situazioni con meno dati nell'header, ma è bene sapere che in alcuni casi le informazioni nell'header possono arrivare vino a 2000 byte.
 Andando a ricapitolare possiamo vedere come il rapporto tra dati inutili(694 byte) e dati utili(81 byte) sia di  circa 8:1, un gran spreco di dati.
 Vediamo cosa accadrebbe distribuendo questa applicazione ad un ampio numero di utenti. 
 ipotizziamo tre scenari di utilizzo:
