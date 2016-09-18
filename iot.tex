@@ -24,13 +24,13 @@ In particolare si chiede se a breve ci troveremo in una di queste ere:
 Molti di questi oggetti sono inutili, o quasi. Si pensi ad una semplice lampadina, è bello poterla pilotare senza doversi muovere dal divano, ma il problema che risolve è banale.
 Non tutti questi smart device parlano la stessa lingua. Prodotti di costruttori diversi usano protocolli diversi isolandosi l'un l'altro.
 Ci capita spesso di vedere falle di sicurezza che permettano a dei semplici "smanettoni" di accedere senza troppi problemi al microfono e alla webcam della nostra smart tv, anche delle marche più famose.
-Il costo delle componenti elettroniche si sta abbassando drasticamente, è possibile acquistare dei mini-pc per pochi euro. Una generica casa con l'ausilio di questi dispositivi e di qualche sensori può raccogliere più informazioni di quanti ne raccoglieva google 10 anni fa.
+Il costo delle componenti elettroniche si sta abbassando drasticamente, è possibile acquistare dei mini-pc per pochi euro. Una generica casa con l'ausilio di questi dispositivi e di qualche sensore può raccogliere più informazioni di quanti ne raccoglieva google 10 anni fa.
 Infine, per ogni oggetto che compriamo, troviamo la relativa app sullo store che permette di utilizzare il dispositivo che altrimenti sarebbe inutilizzabile.
 
 Prendendo atto di queste considerazioni e del fatto che il nostro sistema deve adattarsi più all'uso in ufficio che in una casa, abbiamo deciso che il nostro sistema deve avere le seguenti caratteristiche:
 \begin{enumerate}
-\item Deve essere open source: per dare la possibilità a chiunque di migliorarlo e di integrarlo con i propri dispositivi;
-\item Deve essere centralizzato: non vogliamo avere tanti oggetti intelligenti,
+\item Open source: per dare la possibilità a chiunque di migliorarlo e di integrarlo con i propri dispositivi;
+\item Centralizzato: non vogliamo avere tanti oggetti intelligenti,
 ma uno centrale che ne controlli tanti "stupidi". Questa soluzione non è adatta per spazi ampi come una casa in cui comporterebbe un alto costo per il cablaggio, ma è adatta a singole stanze come un ufficio. 
 \end{enumerate} 
 
@@ -58,7 +58,7 @@ di ingresso/uscita, il sistema di interconnessione. Inizialmente esistevano tre 
 \item Model B, consigliato per l'utilizzo nelle scuole;
 \item Model B+, potenziamento del Model B.
 \end{enumerate}
-Successivamente sono uscite nuove versioni del model B, caratterizzate da più RAM e una cpu migliore, che prendono il nome di Rasperry PI 2 e 3.
+Successivamente sono uscite nuove versioni del model B, caratterizzate da più RAM e una CPU migliore, che prendono il nome di Rasperry PI 2 e 3.
 Per il nostro progetto abbiamo scelto di utilizzare il Raspberry PI 2 in
 quanto è il dispositivo che apre a maggiori possibilità. Il Raspberry Pi 2,
 infatti, è dotato di 4 porte USB, un connettore femmina RJ45
@@ -74,7 +74,5 @@ memoria RAM.
 
 \subsection{Perchè Raspberry}
 
-Come già descritto nel capitolo \ref{chap:intro}, il prodotto che dobbiamo realizzare non solo deve essere in grado di far girare un webserver, ma deve anche essere in grado di cominicare
-con il mondo esterno. Raspberry Pi si è rilevato perfetto per questo scopo.
-Essendo un dispositivo low cost che però ha sia un processore discreto che la possibilità
-di comunicare con relè e sensori in quanto è dotato di ben 40 GPIO.
+Come già descritto nel capitolo \ref{chap:intro}, il prodotto che dobbiamo realizzare non solo deve essere in grado di far girare un webserver, ma deve anche essere in grado di comunicare con il mondo esterno. Raspberry Pi si è rilevato perfetto per questo scopo.
+Essendo un dispositivo low cost che però ha sia un processore discreto che la possibilità di comunicare con relè e sensori, in quanto è dotato di ben 40 GPIO.
