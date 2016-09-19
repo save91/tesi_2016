@@ -5,10 +5,11 @@ Questa tesi rappresenta la terza ed ultima parte dello stage++\footnote{Lo stage
 realizzato in collaborazione con e-xtrategy, il Prof. Francesco De Angelis e con il collega e amico Marco D'Argenio.
 In questo stage ci è stato chiesto di realizzare un'applicazione per la domotica pensata per l'ufficio che prevedesse l'uso dei beacon, ovvero dei piccoli trasmettitori bluetooth che permettono la geolocalizzazione interna negli edifici. 
 Proprio per questo motivo, il nome che abbiamo deciso di dare al nostro prodotto è: "Proximity System".
+
 Gli obiettivi che dovevamo raggiungere con questo progetto erano numerosi, ragion per cui, io e Marco, ci siamo divisi il carico in maniera bilanciata e logica.
-Marco ha trattato gli argomenti relativi al frontend dell'applicazione e ha studiato il BMC\footnote{Business Model Canvas} del prodotto per vedere la fattibilità dello stesso da un punto di vista economico. 
+Io ho trattato tutti gli argomenti inerenti al backend e ai beacon. 
+Marco, invece, ha trattato gli argomenti relativi al frontend dell'applicazione e ha studiato il BMC\footnote{Business Model Canvas} del prodotto per vedere la fattibilità dello stesso da un punto di vista economico. 
 Questi argomenti non verranno trattati qui, ma nella tesi di Marco:"Analisi e sviluppo di un sistema software per la domotica d'ufficio: il frontend di Proximity System".
-Io, invece, ho trattato tutti gli argomenti inerenti al backend e ai beacon. 
 
 In sintesi, il progetto prevede tre parti: 
 \begin{enumerate}
@@ -17,6 +18,7 @@ In sintesi, il progetto prevede tre parti:
 \item Un'app mobile per gestire i dispositivi
 \end{enumerate}
 Tutte e tre le componenti hanno una cosa in comune, sono tutte scritte in Javascript.
+
 In questa tesi vedremo in dettaglio il primo punto e in generale come utilizzare lo stack MEAN\index{MEAN} per lo sviluppo di applicazioni web rispetto al tradizionale stack LAMP e come le WebSocket possano aumentare drasticamente le performance di un'applicazione real-time.
 
 Il codice completo del progetto è disponibile nei due repository
@@ -32,10 +34,32 @@ La fase di analisi e di progettazione non si è sviluppata in maniera tradiziona
 Fra le pratiche promosse da questi metodi ci sono la formazione di team di sviluppo piccoli, cross-funzionali e auto-organizzati, 
 lo sviluppo iterativo e incrementale, la pianificazione adattiva, e il coinvolgimento diretto e continuo del cliente nel processo di sviluppo.
 
+Per essere precisi, abbiamo utilizzato un mix tra Scrum e Kanban.
+Con Scrum\cite{scrum}\index{Scrum}, il prodotto viene realizzato tramite una serie di iterazioni a intervalli regolari chiamate sprint\index{Sprint} che danno al team un framework per consegnare al cliente del codice con una cadenza costante.
+L'idea è quella che degli sprint frequenti rinforzano l'importanza di fare delle giuste stime e permettono di ricevere feedback in tempo reale sul lavoro svolto.
+Ogni sprint è caratterizzato da questi quattro riti:
+\begin{enumerate}
+\item \textbf{Pianificazione}: un incontro iniziale in cui definire cosa fare con lo sprint corrente.
+\item \textbf{Scrum giornaliero}: un mini incontro giornaliero della durata di una decina di minuti per sincronizzare il team. 
+\item \textbf{Demo}: un incontro per illustrare il lavoro svolto dal team.
+\item \textbf{Retrospettiva}: una revisione di ciò che si è stato fatto per farlo meglio la volta successiva.
+\end{enumerate} 
+
+Kanban\cite{kanban}\index{kanban} ci è d'aiuto durante gli sprint per tenere sott'occhio tramite una board l'avanzamento del nostro progetto.
+Con questa metodologia il lavoro dell'intero team gira intorno alla kanban board, uno strumento utilizzato per visualizzare e ottimizzare il flusso del lavoro per tutto il team.
+Mentre delle lavagne o intere pareti sono popolari per molti team, le board virtuali sono una caratteristica cruciale per lo sviluppo di software con le metodologie agile per la loro tranciabilità, facilità di collaborazione e accessibilità da diverse località.
+
+Al di là che la board sia fisica o digitale, la sua funzione è quella di assicurare che il lavoro del team sia visualizzato, che il flusso sia standardizzato e che ogni imprevisto sia immediatamente visualizzato e risolto.
+una kanban board di base ha tre step: To Do, In Progress e Done.
+È ovvio che non c'è nessun vincolo sulla gestione del flusso e esso dipende da diversi fattori.
+La metodologia kanban è basata sulla trasparenza del lavoro svolto e sulla comunicazione,
+perciò  la kanban board dovrebbe essere vista come unica fonte di verità per il team. 
+
 Questa impostazione crea l'esigenza di una piattaforma in grado di tenere traccia dello sviluppo del software e delle user-stories da implementare, capace anche di coordinare gli sviluppatori dedicati a quel caso.
+Nonostante kanbanize probabilmente è una delle soluzione online più adatte ad implementare la metodologia Kanban, abbiamo scelto Trello perché il nostro piccolo team non necessitava di applicare alla lettera Kanban tutte le procedure consigliate per la gestione del flusso e una semplice todo list era più che sufficiente.
+ 
 Trello\index{Trello}\cite{trello} é un gestore di progetti basato sul web, originariamente realizzato da Fog Creek Soft-ware nel 2011.
-Trello utilizza il paradigma Kanban per la gestione dei progetti. 
-Quest'ultimi sono rappresentati da schede, che contengono liste corrispondenti ad elenchi di attività. 
+In questo caso il progetto è rappresentato da schede, che contengono liste corrispondenti ad elenchi di attività. 
 Le liste sono formate da card, che rappresentano le singole attività. 
 Le card sono tenute a passare da una lista all'altra, tramite la funzione drag-and-drop; per via del generico flusso di una card, essa dovrebbe passare dalla lista delle cose da fare a quelle fatte, al momento del passaggio dall'idea alla realizzazione dell'attività in questione.
 Nello specifico le card rappresentano le user-stories, funzionalità utile al raggiungimento di un obiettivo di business, una descrizione appositamente non dettagliata che il software deve avere e che alimenti la discussione tra il cliente/utente e lo sviluppatore.
