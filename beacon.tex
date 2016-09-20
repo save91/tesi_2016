@@ -116,7 +116,7 @@ Quando si crea la richiesta si deve specificare l'UUID dell'iBeacon advertisemen
 In aggiunta all'UUID, un applicazione può selezionare il major ed il minor per rendere più specifica la regione da monitorare.
 
 Come per il monitoraggio di regioni con il GPS, quando un utente entra o esce da una regione l'applicazione riceverà una notifica. 
-Se l'applicazione non è in esecuzione(per esempio se è stata terminate per necessità di ram da parte del sistema), l'applicazione verrà lanciata in backgroud e gli verrà inoltrata la notifica. 
+Se l'applicazione non è in esecuzione(per esempio se è stata terminate per necessità di ram da parte del sistema), l'applicazione verrà lanciata in background e gli verrà inoltrata la notifica. 
 Un'importante considerazione sta nel fatto che se l'utente disabilita "Background App Refresh" allora l'app non verrà riavviata e quindi non riceverà le notifiche.
 
 \subsection{Ranging}
@@ -211,28 +211,6 @@ $70.368.744.177.664 = 2^{46}$ & $0,0000000005 = 5( 10^{-10})$\\
 \caption{Probababilità collisione UUID}
 \label{tab:table}
 \end{table}
-\subsection{ngCordova}
-ngCordova\index{ngCordova} mette a disposizione un plugin che permette di utilizzare gli iBeacon in un'app ionic che funziona sia con android che con iOS.
-Per installarlo in un progetto ionic basta dare il segente comando:\\
-\texttt{cordova plugin add \\https://github.com/petermetz/cordova-plugin-ibeacon.git}\\
-Le principali caratteristiche messe a disposizione sono: ranging e monitoring. Il monitoraggio delle regioni(o geo fencing), in iOS funziona in tutti gli stati dell'app.
-Inoltre per iOS c'è anche la possibilità di utilizzare il dispositivo come iBeacon, ma solo con app in foreground.
-
-Le API del plugin cercano mimare alla perfezione quelle esposte da CCLocationManager introdotte in iOS 7.
-
-Le funzioni standard di CCLocationManager sono:
-\begin{itemize}
-\item Creazione di un BeaconRegion
-\item Start monitoraggio di una singola regione
-\item Stop monitoraggio
-\item Start ranging
-\item Stop ranging
-\item Determinare se l'advertising è supportato
-\item Determinare se l'advertising è attivo
-\item Iniziare ad inviare advertising
-\item Stop advertising
-\item Abilitare-disabilitare il bluetooth
-\end{itemize}
 
 \section{BlueUp}
 Tra le diverse aziende presenti nel mercato, abbiamo scelto un'azienda italiana per l'acquisto dei nostri primi beacon: la BlueUp.

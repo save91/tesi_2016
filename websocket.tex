@@ -6,6 +6,7 @@ Queste API danno la possibilità a chiunque di implementare un proprio client pe
 Il problema di questi servizi è che che sono di tipo pull, ovvero dev'essere il client a chiedere informazioni al server. 
 Il server non può inviare i dati aggiornati appena sono disponibili,
 ma soltanto quando un client li richiede.
+
 In questo capitolo andremo a vedere come risolvere questo problema con il metodo di comunicazione più potente introdotto con la specifica HTML5: le WebSocket.
 Queste non sono altro che un canale di comunicazione full-duplex operante su una singola socket che permette di migliorare drasticamente sia la quantità di traffico che la latenza di tutte le applicazione web basate sulla visualizzazione di dati in tempo reale e sugli eventi.
   
@@ -23,7 +24,7 @@ Esistono diverse tecniche che permettono di implementare questo modello basato s
 
 La più diffusa tra le tecniche comet è il polling, che consiste nell'invio di richieste HTTP a intervalli regolari con una risposta immediata da parte del server. 
 Questa tecnica è efficiente nei casi in cui si conosce a prescindere ogni quanto tempo i dati verranno aggiornati dal server.
-Come è facile immaginare non è sempre facile prevedere con quale cadenza i dati verranno aggiornati, causando un numero elevato di richieste non necessarie.
+Come è facile immaginare non è sempre semplice prevedere con quale cadenza i dati verranno aggiornati, causando un numero elevato di richieste non necessarie.
 Quello che ne deriva è l'apertura e la chiusura di un alto numero di connessioni e quindi l'utilizzo di risorse non strettamente necessarie.
 
 Una possibile soluzione è l'implementazione del long-polling, dove il client invia una richiesta al server che risponderà soltanto se i dati sono stati aggiornati e farà scadere la richiesta altrimenti. È importante far notare che se il numero di aggiornamenti è alto, non si hanno vantaggi rispetto al polling tradizionale.
@@ -42,7 +43,7 @@ In questo modo la connessione rimane aperta per i messaggi seguenti.
 Il problema è dato dal fatto che lo streaming è incapsulato in una richiesta HTTP e in quanto tale un eventuale firewall o proxy nel mezzo potrebbero interferire bufferizzando la risposta.
 Per questo motivo molti sistemi passano automaticamente al long-polling se rilevano la presenza di qualche proxy.
 Una possibile soluzione alternativa è quella di utilizzare connessioni TLS per impedire il buffering della risposta,
-ma in questo caso bisogna prendere in considerazione utilizzo di
+ma in questo caso bisogna prendere in considerazione l'utilizzo di
 maggiori risorse da parte del server.
 
 Tutte le tecniche sopra descritte hanno in comune due problemi:
@@ -92,19 +93,19 @@ Per questo motivo l'handshake è una richiesta di HTTP upgrade.
 	Sec-WebSocket-Version: 13
 \end{lstlisting} 
 
-Come stabilito nel RFC 2616, i campi dell'header possono essere inviati in qualsiasi ordine.  
+Come stabilito nel RFC 2616\cite{RFC2616}, i campi dell'header possono essere inviati in qualsiasi ordine.  
 Il metodo GET viene utilizzato sia per identificare la WebSocket corretta, sia per far in modo che domini multipli possano essere serviti da un singolo indirizzo IP e per permettere la gestione di più WebSocket in un singolo server.
 
-Il client include nell'header il nome dell'host del server così come descritto in RFC2616\cite{RFC2616}, in modo tale che sia il client che il server
+Il client include nell'header il nome dell'host del server così come descritto in RFC2616, in modo tale che sia il client che il server
 possano verificare che l'host in uso sia quello corretto.
 
 Campi dell'header addizionali possono essere aggiunti  per selezionare
 delle opzioni del protocollo WebSocket.
 Le opzioni tipiche che vengono utilizzate sono:
 \begin{itemize}
-\item Sec-WebSocket-Protocol: lista dei sotto protocolli disponibili nel client;
-\item Sec-WebSocket-Extension: lista delle estensioni disponibili nel client;
-\item Origin: per la gestione del CORS.
+\item \textbf{Sec-WebSocket-Protocol}: lista dei sotto protocolli disponibili nel client;
+\item \textbf{Sec-WebSocket-Extension}: lista delle estensioni disponibili nel client;
+\item \textbf{Origin}: per la gestione del CORS.
 \end{itemize}
 
 Il campo \emph{Origin} vieni utilizzato come contromisura per 
@@ -363,7 +364,7 @@ L'unica cosa che fa il server è inviare in broadcast a tutte le socket connesse
 Se non avessimo utilizzato Socket.io avremmo dovuto implementare soluzioni alternative nel caso in cui le WebSocket non fossero disponibili nel client o 
 l'handshake non andasse a buon fine, in questo caso, invece, è Socket.io che si occupa di gestire tutti i possibili problemi e fornire una soluzione equivalente, in maniera sempre trasparente al programmatore.
 \subsection{Frontend}
-Il frontend, molto semplicemente, invierà i messaggi scritti dall'utente tramite Socket.io al server e visualizzerà a video i messaggi ricevuti dal server, il tutto, real-time.
+Il frontend, molto semplicemente, invierà i messaggi scritti dall'utente tramite Socket.io al server e visualizzerà a video i messaggi ricevuti, il tutto, real-time.
 Per utilizzare Socket.io come se fosse un servizio di Angular, 
 abbiamo installato il plugin \texttt{angular-socket-io}, disponibile tramite bower e inizializzato come segue.
 \begin{lstlisting}[caption={service mySocket}, style=javaScriptCode]

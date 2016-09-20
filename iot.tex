@@ -1,19 +1,16 @@
 \chapter{IoT}
-In questo capitolo andremo a vedere per prima cosa a vedere che cosa è l'internet delle cose per poi descrivere la board che abbiamo utilizzato per realizzare il nostro progetto. 
-
-{\Huge NOTA *** CREARE SCHEMA ELETTRICO *** ED AGGIUGNERLO A GITHUB}
-
+In questo capitolo andremo a vedere per prima cosa cos'è l'internet delle cose, per poi descrivere la board che abbiamo utilizzato per realizzare il nostro progetto. 
 
 \section{Il futuro delle smart home}
 Tutti noi abbiamo sentito parlare, almeno una volta, dell'internet delle cose,
 ma in pochi sanno dare una definizione precisa di che cosa sia l'IoT.
 Questo perché una definizione rigorosa ad oggi non esiste.
 Quello che si intende per Internet of Things è l'estensione della rete ad un numero sempre crescente di dispositivi, o meglio oggetti.
-L'insieme di questi: termostati, robot, droni, smart tv, lavastoviglie e molti altri elettrodomestici; rappresenta una solida base per la costruzione di vere è proprie case intelligenti.
+L'insieme di questi: termostati, robot, droni, smart tv, lavastoviglie e molti altri elettrodomestici; rappresenta una solida base per la costruzione di vere e proprie case intelligenti.
 
 L'IoT sta prendendo, giorno dopo giorno, una fetta di mercato sempre più ampia, evolvendosi in fretta e senza seguire standard e protocolli ben specifici. 
 Marteen Ector\footnote{Marteen Ectors è uno dei massimi esponenti dell'IoT di  Canonical} ha scritto un articolo\cite{smart} in cui evidenzia dei possibili problemi relativi al futuro di questi oggetti intelligenti.
-In particolare si chiede se a breve ci troveremo in una di queste ere:
+In particolare si chiede se ci troviamo in una di queste ere:
 \begin{itemize}
 \item Internet of Useless Things era
 \item Internet of Isolated Things era
@@ -21,16 +18,24 @@ In particolare si chiede se a breve ci troveremo in una di queste ere:
 \item Internet of Smart Cheap Things era
 \item Internet of App-Enabled Things era
 \end{itemize}
-Molti di questi oggetti sono inutili, o quasi. Si pensi ad una semplice lampadina, è bello poterla pilotare senza doversi muovere dal divano, ma il problema che risolve è banale.
-Non tutti questi smart device parlano la stessa lingua. Prodotti di costruttori diversi usano protocolli diversi isolandosi l'un l'altro.
+Andiamo ad analizzare ogni singola era singolarmente. 
+Molti di questi oggetti sono \emph{inutili}, o quasi. Si pensi ad una semplice lampadina, è bello poterla pilotare senza doversi muovere dal divano, ma il problema che risolve è banale.
+
+Non tutti questi smart device parlano la stessa lingua. Prodotti di costruttori diversi usano protocolli diversi \emph{isolandosi} l'un l'altro.
+
 Ci capita spesso di vedere falle di sicurezza che permettano a dei semplici "smanettoni" di accedere senza troppi problemi al microfono e alla webcam della nostra smart tv, anche delle marche più famose.
-Il costo delle componenti elettroniche si sta abbassando drasticamente, è possibile acquistare dei mini-pc per pochi euro. Una generica casa con l'ausilio di questi dispositivi e di qualche sensore può raccogliere più informazioni di quanti ne raccoglieva google 10 anni fa.
+Siamo sicuri che vogliamo una casa \emph{insicura}?
+
+Il quarto punto rappresenta in realtà un vantaggio dato dal costo delle componenti elettroniche che si sta abbassando drasticamente.
+Grazie a ciò è possibile acquistare dei mini-pc per pochi euro. 
+Una generica casa con l'ausilio di questi dispositivi e di qualche sensore può raccogliere più informazioni di quanti ne raccoglieva google 10 anni fa.
+
 Infine, per ogni oggetto che compriamo, troviamo la relativa app sullo store che permette di utilizzare il dispositivo che altrimenti sarebbe inutilizzabile.
 
 Prendendo atto di queste considerazioni e del fatto che il nostro sistema deve adattarsi più all'uso in ufficio che in una casa, abbiamo deciso che il nostro sistema deve avere le seguenti caratteristiche:
 \begin{enumerate}
-\item Open source: per dare la possibilità a chiunque di migliorarlo e di integrarlo con i propri dispositivi;
-\item Centralizzato: non vogliamo avere tanti oggetti intelligenti,
+\item \textbf{Open source}: per dare la possibilità a chiunque di migliorarlo e di integrarlo con i propri dispositivi;
+\item \textbf{Centralizzato}: non vogliamo avere tanti oggetti intelligenti,
 ma uno centrale che ne controlli tanti "stupidi". Questa soluzione non è adatta per spazi ampi come una casa in cui comporterebbe un alto costo per il cablaggio, ma è adatta a singole stanze come un ufficio. 
 \end{enumerate} 
 
