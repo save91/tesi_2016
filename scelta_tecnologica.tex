@@ -17,12 +17,89 @@ Lo stack MEAN è un sostituto dello stack LAMP\index{LAMP} (Linux, Apache, MySQL
 In questa tesi non descriveremo Angular perché verrà fatto nell'elaborato di Marco in cui descriverà il frontend. 
 Andiamo quindi a costruire le REST API che non hanno una user interface, ma sono la nostra base per qualsiasi tipo di applicazione, come un sito web, un'app Android, iOS o Ubuntu Touch.
 
+\section{JSON}
+\nocite{ajax}
+JSON è un formato di dati molto leggere basato su un sottoinsieme della sintassi JavaScript, cioè \emph{array literal} e \emph{object literal}, proposto da Douglas Crockford come formato per i servizi web in sostituzione al verboso XML\index{XML}.
+Dato l'utilizzo della sintassi Javascript, le definizioni JSON\index{JSON} possono essere incluse all'interno dei file JavaScript ed è possibile accedervi senza l'analisi aggiuntiva necessaria con i linguaggi basati su XML.
+\subsection{Gli array literal}
+
+Gli \emph{array literal} rappresentano il metodo più semplice per creare un Array in javaScript.
+Infatti, basta elencare una lista di valori separati da una virgola all'interno delle parentesi quadre, per esempio:
+\begin{lstlisting}[style=JavaScriptCode]
+var users = ["Saverio", "Marco", "Francesco"];
+\end{lstlisting}
+Funzionalmente parlando è equivalente alla forma tradizionale:
+\begin{lstlisting}[style=JavaScriptCode]
+var users = new Array("Saverio", "Marco", "Francesco");
+\end{lstlisting}
+Entrambe le definizioni generano lo stesso risultato ed è possibile accedere ad ogni elemento dell'array utilizzando il relativo indice 
+\begin{lstlisting}[style=JavaScriptCode]
+console.log(users[0]); \\Saverio 
+console.log(users[1]); \\Marco
+console.log(users[2]); \\Francesco
+\end{lstlisting}
+Quando si parla di array in JavaScript è bene tenere in mente due cose.
+La prima è che JavaScript non è tipizzato e quindi l'array può contenere tipi di dati completamente diversi.
+La seconda è che nonostante entrambi i metodi per la creazione di un array siano leciti in JavaScript, soltanto gli array literal sono validi in JSON.
+\subsection{Gli object literal}
+Un object literal è definito tra parentesi graffe.
+Al loro interno troviamo un numero qualsiasi di coppie chiave-valore, definite con una stringa, i due punti ed il valore.
+Ogni coppia deve essere seguita da una virgola, eccetto l'ultima. 
+Questo insieme di coppie chiave-valore rappresenta alla fine un oggetto.
+Un esempio:
+\begin{lstlisting}[style=JavaScriptCode]
+var user = {
+	"firstname": "Saverio",
+	"permission": 0,
+	"block": false
+};
+\end{lstlisting}
+Il codice qui sopra genera un oggetto user con le proprietà firstname, permission e block. 
+Per accedere alle proprietà dell'oggetto basta usare la notazione con il punto
+\begin{lstlisting}[style=JavaScriptCode]
+console.log(user.firstname); \\"Saverio"
+console.log(user.permission); \\"0"
+console.log(user.block); \\"false"
+\end{lstlisting}
+Lo stesso oggetto potrebbe essere creato utilizzando il costruttore \texttt{Object} di JavaScript
+\begin{lstlisting}[style=JavaScriptCode]
+var user = new object():
+user.firstname = "Saverio";
+user.permission = 0;
+user.block = false;
+\end{lstlisting}
+Anche in questo caso, sebbene entrambi gli approcci siano validi in JavaScript, in JSON è valida solo la notazione object literal.
+\subsection{La sintassi JSON}
+La sintassi di JSON non è altro che il miscuglio di object literal ed array literal per memorizzare dati.
+Quello che bisogna tener bene a mente è che JSON rappresenta solo dati.
+Un esempio:
+\begin{lstlisting}[style=JavaScriptCode]
+[
+	{
+		"firstname": "Saverio",
+		"permission": 0,
+		"block": false
+	},
+	{
+		"firstname": "Marco",
+		"permission": 10,
+		"block": false
+	}
+]
+\end{lstlisting}
+La prima cosa che salta all'occhio è che in questo documento non sono presenti variabili così come punti e virgola.
+In questo modo quando si trasmette dei dati tramite HTTP ad un browser, il tutto avviene abbastanza velocemente grazie al numero ridotto di caratteri.
+
+Oltre a questo, ci sono altri ovvi benefici dell'utilizzare JSON come formato dati per la comunicazione JavaScript: esso consente di non preoccuparsi della valutazione dei dati, e quindi, garantisce un accesso più veloce alle informazioni che essi contengono. 
+Per un confronto dettagliato tra JSON e XML si rimanda alla bibliografia  \cite[pag. 251]{ajax}.
 \section{REST}
 REST sta per Representational State Transfer\cite{rest}. È una alternativa più semplice di SOAP e WSDL che sono protocolli basati su XML.
 
-REST utilizza un modello client-server, dove il server è un server HTTP e il client invia richieste HTTP (GET, POST, PUT, DELETE), con un URL che al suo interno contiene i parametri codificati. L'URL describe l'oggetto e il server risponde con un codice e del JSON (JavaScript Object Notation).
+REST utilizza un modello client-server, dove il server è un server HTTP e il client invia richieste HTTP (GET, POST, PUT, DELETE), con un URL che al suo interno contiene i parametri codificati. L'URL describe l'oggetto e il server risponde, almeno nel nostro caso, con un codice e del JSON (JavaScript Object Notation).
+In genere ci si aspetta che un server REST restituiasca un documento XML, sebbene nulla dell'architettura REST definisca il tipo di dati restituiti.
+Un generico URL potrebbe restituire un'immagine, un documento HTML, un file CSV o qualunque altro tipo di dato.
 
-Dato che il server risponde con dei JSON, rende lo stack MEAN particolarmente adatto per la nostra applicazione, in cui tutti i nostri componenti sono in javascript e MongoDB interagisce perfettamente con questo formato. 
+Dato che utilizziamo lo stack MEAN, abbiamo scelto di utilizzare documenti JSON che risultano particolarmente adatti per la nostra applicazione, in cui tutti i nostri componenti sono in javascript e MongoDB interagisce perfettamente con questo formato. 
 Faremo degli esempi più dettagliati più avanti quando definiremo i nostri Data Model.
 
 L'acronimo CRUD è spesso utilizzato per descrivere le operazioni in un database. CRUD sta per CREATE, READ, UPDATE and DELETE. 
@@ -69,7 +146,7 @@ Diamo una sguardo alla prima collection:
     "password": "123456",
     "permission": 0,
     "theme": "red",
-    "block": false.
+    "block": false,
     "photo": "codificata in base 64"
 }
 \end{lstlisting}
@@ -126,6 +203,8 @@ In altre parole, un utente può accedere ad un dispositivo se e solo se il numer
 \end{lstlisting}
 
 Un GPIO avrà soltanto le seguenti informazioni: il tipo, output o input; GPIO, che identifica il piedino nel raspberry; \_Device, un riferimento al dispositivo associato; value, che rappresenta il valore attuale del GPIO.
+
+section
 
 \section{Documentazione}
 Una parte fondamentale della progettazione di API REST è la documentazione.
