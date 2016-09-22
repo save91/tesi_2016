@@ -285,6 +285,12 @@ Dal codice \ref{lst:async} ci si potrebbe aspettare che il risultato sia:
 in realtà potrebbe capitare che l’output sia \texttt{twoone}.
 Questa situazione di incertezza dei programmi asincroni viene chiamata esecuzione non deterministica. 
 Questo caratteristica permette al programma di essere particolarmente performante, ma ci sono alcuni casi in cui è desiderabile eseguire determinate azioni in un determinato ordine. 
+
+Per questo scopo ci viene incontro Async.
+Async è un modulo che fornisce delle funzioni per lavorare con il JavaScript asincrono.
+Ce ne sono circa venti tra cui molte classiche come: map, reduce, filter, each, etc. 
+Altre più comuni per il controllo del flusso asincrono come parallel e series.
+Tutte queste funzioni seguono la convenzione di Node.js di mettere una singola callback come ultimo parametro della funzione. 
 L'esempio seguente illustra come stampare i due numeri nell'ordine corretto utilizzando la libreria async:
 
 \begin{lstlisting}[caption={operazioni sincrone}, style=javaScriptCode]
