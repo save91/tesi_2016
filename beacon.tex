@@ -220,16 +220,18 @@ BlueUp realizza beacon e sensori con tecnologia Bluetooth Low Energy: la serie B
 I dispositivi BlueBeacon sono proposti in due versioni firmware, che supportano i principali standard presenti sul mercato: 
 la tecnologia iBeacon di Apple oppure la specifica Eddystone di Google.
 \subsection{Caratteristiche}
-I BlueBeacon hanno prestazioni radio allo stato dell'arte, superiori alla maggior parte dei dispositivi beacon in commercio. 
+I BlueBeacon hanno prestazioni radio ottime, superiori alla maggior parte dei dispositivi beacon in commercio. 
 Questo risultato è garantito da una serie di scelte tecnologiche che sono state adottate sui BlueBeacon:
 \begin{itemize}
-\item utilizzo del pluri-premiato chip radio Nordic nRF51822, che garantisce ottime prestazioni a livello radio e di consumi;
+\item utilizzo del chip radio Nordic nRF51822, che garantisce ottime prestazioni a livello radio e di consumi;
 \item antenna stampata su PCB di tipo meandered PIFA (Planar Inverted F Antenna) che offre prestazioni superiori in termini di guadagno rispetto alle antenne a chip comunemente adottate;
 \item antenna progettata per essere adattata in presenza dell'involucro plastico, riducendo quindi le perdite per riflessione;
 \item rete di adattamento RF basata su singolo chip (balun), che riduce le perdite di inserzione rispetto alle convenzionali reti ad elementi discreti;
 \end{itemize}
 
-Grazie a queste soluzioni, i BlueBeacon, a parità di potenza emessa dal chip radio, trasmettono un livello di potenza superiore di un fattore 2 - 4 rispetto a dispositivi concorrenti. Questo permette di ridurre la potenza emessa dal chip, con un conseguente riduzione dei consumi e, quindi, aumento della vita operativa delle batterie. Inoltre, un segnale con un livello di potenza maggiore garantisce una superiore stabilità in ricezione e un aumento della distanza di comunicazione del beacon. 
+Grazie a queste soluzioni, i BlueBeacon, a parità di potenza emessa dal chip radio, trasmettono un livello di potenza superiore di un fattore 2 - 4 rispetto ad altri dispositivi. 
+Questo permette di ridurre la potenza emessa dal chip, con un conseguente riduzione dei consumi e, quindi, aumento della vita operativa delle batterie. 
+Inoltre, un segnale con un livello di potenza maggiore garantisce una superiore stabilità in ricezione e un aumento della distanza di comunicazione del beacon. 
 \subsection{Trasmissione}
 La misura della distanza con i beacon è basata sul valore dell'RSSI (Received Signal Strength Indicator), ovvero della potenza del segnale RF ricevuto dallo smartphone. 
 Il segnale ricevuto risente fortemente di una serie di elementi, fra cui, l'orientazione e la posizione relative dello smartphone rispetto al beacon, la presenza del corpo umano, fenomeni di riflessione e diffrazione dall'ambiente (soprattutto struttire metalliche).
