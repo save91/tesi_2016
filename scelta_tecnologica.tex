@@ -272,7 +272,7 @@ Poi sono segnati l'autore, la licenza e l'elenco delle dipendenze.
 I test dell'applicazione li abbiamo scritti con Frisby ed eseguiti con Jasmine-node.
 
 Una libreria particolarmente interessante è async. 
-Node.js è stato progettato per essere asincrono.
+Come già detto, Node.js è stato progettato per essere asincrono.
 Qualsiasi operazione che ha a che fare con blocchi di I/O, come leggere un file o interrogare un database, prenderà una callback come ultimo parametro e continuerà l'esecuzione del programma, 
 solo quando l'operazione sarà completa il programma richiamerà la callback. 
 Ecco un semplice esempio per spiegare meglio il tutto.
@@ -292,7 +292,14 @@ in realtà potrebbe capitare che l’output sia \texttt{twoone}.
 Questa situazione di incertezza dei programmi asincroni viene chiamata esecuzione non deterministica. 
 Questo caratteristica permette al programma di essere particolarmente performante, ma ci sono alcuni casi in cui è desiderabile eseguire determinate azioni in un determinato ordine. 
 
-Per questo scopo ci viene incontro Async.
+Prima di continuare bisogna fare una precisazione. 
+Nonostante l'utilizzo delle callback per la gestione degli eventi asincroni sia una convenzione nel mondo Node.JS, non lo è nel mondo JavaScript.
+Esiste infatti un altro strumento per la gestione degli eventi noto come Promise.
+Una Promise rappresenta un proxy per un valore non necessariamente noto quando la promise viene creata.
+Questa permette di associare un handler alla risposta di un'azione asincrona, che può essere sia positiva che negativa. 
+Ciò permette ai metodi asincroni di restituire valori alla stessa maniera dei metodi sincroni: invece del valore finale, il metodo asincrono restituisce una promessa di ottenere un valore in un certo momento del futuro.
+
+Per risolvere il problema della programmazione non deterministica ci viene incontro Async.
 Async è un modulo che fornisce delle funzioni per lavorare con il JavaScript asincrono.
 Ce ne sono circa venti tra cui molte classiche come: map, reduce, filter, each, etc. 
 Altre più comuni per il controllo del flusso asincrono come parallel e series.
