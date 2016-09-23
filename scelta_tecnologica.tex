@@ -226,8 +226,14 @@ Quello che si ottiene è una documentazione interattiva, con la quale è anche p
 
 \newpage
 \section{NodeJS}
-Node.js\cite{node} è un interprete javascript per applicazioni di rete lato server. 
-È disponibile per diverse piattaforme, come Linux, Microsoft Windows e Apple OS X.
+Node.js\cite{node} è un interprete JavaScript orientato agli eventi, progettato per realizzare applicazioni di rete scalabili.
+Per  ogni connessioni in ingresso viene chiamata la relativa callback, ma se non c'è nessun niente da fare Node rimane inattivo.
+Questo paradigma è in contrasto con quello tradizionale basato sui thread.
+Il principale vantaggio del paradigma ad eventi rispetto a quello basato sui thread si ha quando c'è un alto traffico.
+In questo caso, infatti, l'alto numero di thread genera un alto overhead diminuendo drasticamente le prestazioni della macchina host.
+Inoltre, dato che nessuna funzione di node eseguirà direttamente operazioni di I/O, il processo non si bloccherà mai.
+
+Node è disponibile per diverse piattaforme, come Linux, Microsoft Windows e Apple OS X.
 Le applicazioni Node.js vengono costruite utilizzando librerie e moduli che sono disponibili per l'ecosistema ed alcuni di essi li abbiamo utilizzati per la nostra applicazione.
 Per iniziare ad utilizzare Node.js, dobbiamo per prima cosa creare un file \texttt{package.json} che descrive la nostra applicazione ed elenchi tutte le sue dipendenze.
 NPM (Node.js Package Manager) installa una copia delle librerie in una sotto-cartella chiamata \texttt{node\_modules/}, della cartella principale dell'applicazione. 
