@@ -10,7 +10,7 @@ Per sviluppare la nostra applicazione abbiamo utilizzato lo stack MEAN\index{MEA
 \item M = MongoDB/Mongoose.js: il popolare database, e l'elegante ODM per Node.js
 \item E = Express.js: un framework web leggero
 \item A = Angular.js: un framework per la creazione di single page application
-\item N = Node.js: un interprete JavaScript costruito sul motore JavaScript V8 di Google Chrome orientato agli eventi che lo rende efficiente e leggero.
+\item N = Node.js v4: un interprete JavaScript costruito sul motore JavaScript V8 di Google Chrome orientato agli eventi che lo rende efficiente e leggero.
 \end{itemize}
 Lo stack MEAN è un sostituto dello stack LAMP\index{LAMP} (Linux, Apache, MySQL, PHP/Perl/Python/P…) molto popolare per la costruzione di applicazione web negli anni 90.
 
@@ -226,16 +226,28 @@ Quello che si ottiene è una documentazione interattiva, con la quale è anche p
 
 \newpage
 \section{NodeJS}
-Node.js\cite{node} è un interprete JavaScript orientato agli eventi, progettato per realizzare applicazioni di rete scalabili.
-Per  ogni connessioni in ingresso viene chiamata la relativa callback, ma se non c'è nessun niente da fare Node rimane inattivo.
+Node.js\cite{node} v4 è un interprete JavaScript orientato agli eventi, progettato per realizzare applicazioni di rete scalabili.
+La caratteristica principale è che rimane inattivo finché non arriva una connessione in ingresso, o più generalmente un qualsiasi evento, e viene chiamata la relativa callback.
 Questo paradigma è in contrasto con quello tradizionale basato sui thread.
 Il principale vantaggio del paradigma ad eventi rispetto a quello basato sui thread si ha quando c'è un alto traffico.
 In questo caso, infatti, l'alto numero di thread genera un alto overhead diminuendo drasticamente le prestazioni della macchina host.
-Inoltre, dato che nessuna funzione di node eseguirà direttamente operazioni di I/O, il processo non si bloccherà mai.
+Inoltre, dato che nessuna funzione di Node eseguirà direttamente operazioni di I/O, il processo non si bloccherà mai.
+
+Tra le varie versioni di Node, noi abbiamo scelto quella che, al momento in cui abbiamo iniziato a scrivere il codice, era la LTS(Long Term Support), ovvero la v4.
+Questa versione di Node verrà mantenuta fino ad aprile 2018.
+Questo significa che abbiamo aggiornamenti, sia di sicurezza che di bug fix, garantiti per quasi due anni.
+Purtroppo, però, la versione 4 supporta solo parzialmente ES6, motivo per cui abbiamo deciso di non utilizzare tale specifica e di scrivere il codice direttamente in ES5. 
+
+Se da un lato su un server è normale avere solo una versione di Node, potrebbe non esserlo su una macchina di sviluppo.
+Può capitare, infatti, che uno sviluppatore sia impegnato su più progetti Node che utilizzano versioni differenti.
+Per risolvere questo problema possiamo installare NVM.
+Node Version Manager permette di avere più versioni di Node contemporaneamente nel nostro sistema e fornisce una semplice CLI per poterle gestire.
+In particolare, basta creare un file di testo chiamato \texttt{.nvmrc} in cui salvare la versione di Node che si intende usare per la cartella corrente.
+Poi, sarà sufficiente digitare il comando \texttt{nvm install} per scaricare ed utilizzare la giusta versione.
 
 Node è disponibile per diverse piattaforme, come Linux, Microsoft Windows e Apple OS X.
 Le applicazioni Node.js vengono costruite utilizzando librerie e moduli che sono disponibili per l'ecosistema ed alcuni di essi li abbiamo utilizzati per la nostra applicazione.
-Per iniziare ad utilizzare Node.js, dobbiamo per prima cosa creare un file \texttt{package.json} che descrive la nostra applicazione ed elenchi tutte le sue dipendenze.
+Per iniziare ad utilizzare Node.js, dobbiamo per prima cosa creare un file \texttt{package.json} che descriva la nostra applicazione ed elenchi tutte le sue dipendenze.
 NPM (Node.js Package Manager) installa una copia delle librerie in una sotto-cartella chiamata \texttt{node\_modules/}, della cartella principale dell'applicazione. 
 Questo comporta diversi benefici, ad esempio isola le diverse versioni delle librerie, evitando così i problemi di compatibilità che si sarebbero avuti se avessimo installato tutto in una cartella standard come \texttt{/usr/lib}.
 
