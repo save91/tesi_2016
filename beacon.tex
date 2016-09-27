@@ -95,11 +95,10 @@ Come quando è attivo il GPS, quando utilizziamo la tecnologia iBeacon sarà pre
 Per migliorare la user experience, è importante prendere in considerazione come il segnale dei beacon viene letto e utilizzato per determinare la distanza da esso. 
 Quando un dispositivo iOS rileva un beacon, utilizza la potenza del segnale (RSSI - Received Signal Strength Indication)\index{RSSI} per determinare la proximity dal beacon.
 Più potente è il segnale e migliore sarà la stima fatta dal device.
-La potenza del segnale è generalmente correlata dalla distanza fra il beacon e il dispositivo. In una condizione ideale la vicinanza del dispositivo dal beacon migliora la precisione.
+La potenza del segnale ricevuta è generalmente correlata dalla distanza fra il beacon e il dispositivo. 
+In una condizione ideale la vicinanza del dispositivo dal beacon migliora la precisione.
 Quando un dispositivo è lontano dal beacon, la potenza del segnale sarà minore rispetto a quando è vicino. 
 Minore è la potenza del segnale, minore sarà la precisione nel calcolo della prossimità. 
-Lo stesso accade con il GPS.
-Come il dispositivo si avvicina al beacon, il segnale diventa più forte e di conseguenza migliora la precisione della stima della distanza.
 Ad esempio, se ci troviamo a un metro di distanza il segnale sarà forte e la distanza dal dispositivo sarà calcolata con un errore di qualche cm.
 Altrimenti, se ci troviamo a dieci metri di distanza il segnale sarà debole e la distanza dal dispositivo sarà calcolata con l'errore di qualche metro. 
 Come per il segnale GPS, anche quello del beacon può essere ostacolato da un oggetto fisico.  
