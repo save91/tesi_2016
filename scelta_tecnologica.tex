@@ -20,7 +20,7 @@ Andiamo quindi a costruire le REST API che non hanno una user interface, ma sono
 \section{JSON}
 \nocite{ajax}
 JSON è un formato di dati molto leggere basato su un sottoinsieme della sintassi JavaScript, cioè \emph{array literal} e \emph{object literal}, proposto da Douglas Crockford come formato per i servizi web in sostituzione al verboso XML\index{XML}.
-Dato l'utilizzo della sintassi Javascript, le definizioni JSON\index{JSON} possono essere incluse all'interno dei file JavaScript ed è possibile accedervi senza l'analisi aggiuntiva necessaria con i linguaggi basati su XML.
+Dato l'utilizzo della sintassi Javascript, le definizioni JSON\index{JSON} possono essere incluse all'interno dei file JavaScript\index{JavaScript} ed è possibile accedervi senza l'analisi aggiuntiva necessaria con i linguaggi basati su XML.
 \subsection{Gli array literal}
 
 Gli \emph{array literal} rappresentano il metodo più semplice per creare un Array in javaScript.
@@ -226,7 +226,7 @@ Quello che si ottiene è una documentazione interattiva, con la quale è anche p
 
 \newpage
 \section{NodeJS}
-Node.js\cite{node} v4 è un interprete JavaScript orientato agli eventi, progettato per realizzare applicazioni di rete scalabili.
+Node.js\cite{node}\index{Node} v4 è un interprete JavaScript orientato agli eventi, progettato per realizzare applicazioni di rete scalabili.
 La caratteristica principale è che rimane inattivo finché non arriva una connessione in ingresso, o più generalmente un qualsiasi evento, e viene chiamata la relativa callback.
 Questo paradigma è in contrasto con quello tradizionale basato sui thread.
 Il principale vantaggio del paradigma ad eventi rispetto a quello basato sui thread si ha quando c'è un alto traffico.
@@ -240,9 +240,9 @@ Purtroppo, però, la versione 4 supporta solo parzialmente ES6, motivo per cui a
 
 Se da un lato su un server è normale avere solo una versione di Node, potrebbe non esserlo su una macchina di sviluppo.
 Può capitare, infatti, che uno sviluppatore sia impegnato su più progetti Node che utilizzano versioni differenti.
-Per risolvere questo problema possiamo installare NVM.
+Per risolvere questo problema possiamo installare NVM\index{NVM}.
 Node Version Manager permette di avere più versioni di Node contemporaneamente nel nostro sistema e fornisce una semplice CLI per poterle gestire.
-In particolare, basta creare un file di testo chiamato \texttt{.nvmrc} in cui salvare la versione di Node che si intende usare per la cartella corrente.
+In particolare, basta creare un file di testo chiamato \texttt{.nvmrc} in cui salvare il numero di versione di Node che si intende usare per la cartella corrente.
 Poi, sarà sufficiente digitare il comando \texttt{nvm install} per scaricare ed utilizzare la giusta versione.
 
 Node è disponibile per diverse piattaforme, come Linux, Microsoft Windows e Apple OS X.

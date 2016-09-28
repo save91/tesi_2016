@@ -53,7 +53,7 @@
 \RequirePackage{amsmath}%
 \RequirePackage{amsthm}%
 \RequirePackage[pdftex,bookmarks=true,colorlinks=true,linkcolor=black]{hyperref}%
-\RequirePackage{subfigure}%
+\RequirePackage{subfig}%
 \RequirePackage{xspace}%
 \RequirePackage{array}%
 \RequirePackage{times}%

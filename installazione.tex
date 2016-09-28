@@ -1,1 +1,75 @@
 \chapter{Installazione Proximity System}
+
+In questa sezione vedremo come installare e avviare Proximity System.
+Iniziamo con il backend scaricando il codice da GitHub
+\begin{lstlisting}[style=JavaScriptCode]
+git clone https://github.com/e-xtrategy/unicam-beacon-server.git
+\end{lstlisting}
+Spostiamoci dentro la cartella webserver e installiamo Node tramite NVM
+\begin{lstlisting}[style=JavaScriptCode]
+cd unicam-beacon-server/webserver
+nvm install
+\end{lstlisting}
+Installiamo i moduli per il backend tramite npm e per la webapp tramite bower
+\begin{lstlisting}[style=JavaScriptCode]
+npm install
+npm install -g bower
+cd angular
+bower install
+cd ..
+\end{lstlisting}
+Assicuriamoci che il demone di MongoDB sia in esecuzione e lanciamo il seguente comando per popolare il database con i dati iniziali
+\begin{lstlisting}[style=JavaScriptCode]
+node test/config/setup_tests.js
+\end{lstlisting}
+Prima di far partire il webserver dobbiamo settare una variabile d'ambiente per far capire a Node se ci troviamo in un PC o in un RaspberryPI
+\begin{lstlisting}[style=JavaScriptCode]
+export NODE_ENV=development
+\end{lstlisting}
+Development indica che ci troviamo in fase di sviluppo e quindi su un PC.
+Se ci trovassimo su un RaspberryPi potremmo settarla su production o, più semplicemente, non settarla.
+Ora avviamo il webserver con il comando
+\begin{lstlisting}[style=JavaScriptCode]
+npm start
+\end{lstlisting}
+Se ci troviamo in un PC e non vogliamo eseguire il webserver con i permessi di root è anche possibile avviare il tutto tramite
+\begin{lstlisting}[style=JavaScriptCode]
+node server
+\end{lstlisting}
+Ora il nostro backend resterà in ascolto sulla porta 8000.
+Attenzione al fatto che il codice funziona soltanto sui sistemi operativi basati su Debian.
+Per far girare il programma su altri OS come Windows o Mac dobbiamo rimuovere il modulo rpi-gpio con npm 
+\begin{lstlisting}[style=JavaScriptCode]
+npm remove rpi-gpio
+\end{lstlisting}
+e commentare la prima riga di codice di
+\begin{lstlisting}[style=JavaScriptCode]
+/unicam-beacon-server/webserver/app/services/gpio.js
+\end{lstlisting}
+
+Passiamo all'app.
+Iniziamo scaricando il codice dal repository su GitHub
+\begin{lstlisting}[style=JavaScriptCode]
+cd
+git clone https://github.com/e-xtrategy/unicam-ionic-beacon-app.git
+\end{lstlisting}
+Assicuriamoci di utilizzare la giusta versione di Node
+\begin{lstlisting}[style=JavaScriptCode]
+cd app
+nvm install
+\end{lstlisting} 
+Installiamo Ionic, Cordova, Bower e tutte le dipendenze del progetto
+\begin{lstlisting}[style=JavaScriptCode]
+npm install -g ionic cordova bower
+bower install
+ionic state restore
+\end{lstlisting}
+Passiamo all'esecuzione dell'app.
+Per fare ciò è necessario avere l'ambiente di sviluppo configurato correttamente. 
+Per Android, quindi, sarà necessario aver installato correttamente Android Studio o più generalmente l'SDK, mentre per iOS Xcode.
+Adesso possiamo lanciare rispettivamente i seguenti comandi per android e iOS
+\begin{lstlisting}[style=JavaScriptCode]
+ionic run android
+ionic run ios
+\end{lstlisting}  
+
