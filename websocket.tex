@@ -14,7 +14,7 @@ Queste non sono altro che un canale di comunicazione full-duplex operante su una
 \label{sec:real-time}
 Prima di andare nel dettaglio nella specifica WebSocket, vediamo quali sono e come funzionano i principali "hack" utilizzati per simulare un'applicazione real-time con il protocollo HTTP.
 
-Nei tradizionali siti web quando un server HTTP riceve la richiesta, il server genera la pagina richiesta personalizzata per il client, la inoltra ed è il client che poi fa il render della risposta e la visualizza a video.
+Nei tradizionali siti web quando un server HTTP riceve una richiesta, il server genera la pagina personalizzata per il client, la inoltra ed è il client che poi fa il render della risposta e la visualizza a video.
 Esistono molti casi, come la disponibilità di biglietti per un evento, dati azionari etc. in cui i dati inviati dal server potrebbero già essere deprecati nel momento in cui il client fa il render della pagina. 
 Per avere gli ultimi dati, bisogna aggiornarli continuamente, ad esempio manualmente, anche se ovviamente non rappresenta una soluzione ottimale.
 

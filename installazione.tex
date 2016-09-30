@@ -1,5 +1,5 @@
 \chapter{Installazione Proximity System}
-
+\section{Backend e WebApp}
 In questa sezione vedremo come installare e avviare Proximity System.
 Iniziamo con il backend scaricando il codice da GitHub
 \begin{lstlisting}[style=JavaScriptCode]
@@ -46,7 +46,7 @@ e commentare la prima riga di codice di
 \begin{lstlisting}[style=JavaScriptCode]
 /unicam-beacon-server/webserver/app/services/gpio.js
 \end{lstlisting}
-
+\section{App}
 Passiamo all'app.
 Iniziamo scaricando il codice dal repository su GitHub
 \begin{lstlisting}[style=JavaScriptCode]
@@ -70,6 +70,6 @@ Per Android, quindi, sarà necessario aver installato correttamente Android Stud
 Adesso possiamo lanciare rispettivamente i seguenti comandi per android e iOS
 \begin{lstlisting}[style=JavaScriptCode]
 ionic run android
-ionic run ios
+ionic emulate ios
 \end{lstlisting}  
 

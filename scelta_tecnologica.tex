@@ -204,8 +204,6 @@ In altre parole, un utente può accedere ad un dispositivo se e solo se il numer
 
 Un GPIO avrà soltanto le seguenti informazioni: il tipo, output o input; GPIO, che identifica il piedino nel raspberry; \_Device, un riferimento al dispositivo associato; value, che rappresenta il valore attuale del GPIO.
 
-section
-
 \section{Documentazione}
 Una parte fondamentale della progettazione di API REST è la documentazione.
 Per questa funzione abbiamo utilizzato i tool messi a disposizione da swagger\cite{swagger}\index{Swagger}.
@@ -281,7 +279,6 @@ Il nome della nostra applicazione è proximity-system.
 La versione è la 1.0.0. 
 Sono presenti due script: il primo serve ad avviare il webserver, i permessi di root sono necessari per utilizzare i GPIO nel raspberry; ed un secondo script per eseguire i test. 
 Poi sono segnati l'autore, la licenza e l'elenco delle dipendenze. 
-I test dell'applicazione li abbiamo scritti con Frisby ed eseguiti con Jasmine-node.
 
 Una libreria particolarmente interessante è async. 
 Come già detto, Node.js è stato progettato per essere asincrono.
@@ -353,7 +350,7 @@ module.exports = {
 }
 \end{lstlisting}
 
-Il nostro server, almeno in fase di sviluppo, sarà eseguito in locale sulla porta 8000. Questo solo per i test iniziale. 
+Il nostro server, almeno in fase di sviluppo, sarà eseguito in locale sulla porta 8000. Questo solo per i test iniziali. 
 Quando il sistema andrà in produzione e quindi sul RaspberryPi, basterà cambiare questi parametri.
 
 Per preparare i nostri casi di test, per prima cosa ci dobbiamo assicurare di avere un sistema per farli che funzioni correttamente. 
@@ -631,7 +628,6 @@ exports.addAPIRouter = function(app, mongoose) {
 \end{lstlisting}
 
 
-I principali metodi messi a disposizione dall'oggetto mongoose.
-Schema sono find, save, findAndRemove e update. 
+I principali metodi messi a disposizione dall'oggetto mongoose Schema sono find, save, findAndRemove e update. 
 Nel codice \ref{lst:get_user} vediamo come sia semplice accedere all'elenco degli utenti. 
 Basta infatti richiamare User.find().

@@ -19,7 +19,7 @@ In sintesi, il progetto prevede tre parti:
 \end{enumerate}
 Tutte e tre le componenti hanno una cosa in comune, sono tutte scritte in Javascript.
 
-In questa tesi vedremo in dettaglio il primo punto e in generale come utilizzare lo stack MEAN\index{MEAN} per lo sviluppo di applicazioni web rispetto al tradizionale stack LAMP e come le WebSocket possano aumentare drasticamente le performance di un'applicazione real-time.
+In questa tesi vedremo in dettaglio il primo punto, come utilizzare lo stack MEAN\index{MEAN} per lo sviluppo di applicazioni web rispetto al tradizionale stack LAMP e come le WebSocket possano aumentare drasticamente le performance di un'applicazione real-time.
 
 Il codice completo del progetto è disponibile nei due repository
 \begin{enumerate}
@@ -81,11 +81,12 @@ Per il prototipo, gli input saranno simulati con l'utilizzo di bottoni, nel prod
 Gli output devono pilotare dei relè monostabili che permetteranno di comandare l'accensione/spegnimenti di luci, l'apertura di porte e di cancelli.
 
 Il pannello di amministrazione è rappresentato dalla webapp a cui potrà accedere soltanto l'admin. 
-Essa permette all'admin di gestire gli utenti dell'app dandogli e togliendogli privilegi, creare nuovi dispositivi da associare ai vari GPIO del RaspberryPI e   di configurare il modo in cui gli utenti possono interagire con i dispositivi: in maniera manuale, automatica(tramite beacon) o se per poter controllare il dispositivo è necessario trovarsi nelle vicinanze di esso. 
+Essa permette di gestire gli utenti dell'app dandogli e togliendogli privilegi, creare nuovi dispositivi da associare ai vari GPIO del RaspberryPI e di configurare il modo in cui gli utenti possono interagire con i dispositivi: in maniera manuale, automatica(tramite beacon) o se per poter controllare il dispositivo è necessario trovarsi nelle vicinanze di esso. 
 
 L'ultima componente è l'app mobile. 
 Chi scaricherà l'app dovrà per prima cosa impostare l'indirizzo del server, se non si conosce l'indirizzo deve essere possibile fare una scansione della rete locale per trovare i backend attivi nella propria LAN. 
-Una volta che si è connessi al server si può proseguire con il login/registrazione. La registrazione non abilita l'utente all'utilizzo di Proximity System, l'utente non potrà far nulla finché l'admin non gli dà i permessi per utilizzare l'app. 
+Una volta che si è connessi al server si può proseguire con il login/registrazione. 
+La registrazione non abilita l'utente all'utilizzo di Proximity System, l'utente non potrà far nulla finché l'admin non gli dà i permessi per utilizzare l'app. 
 Con l'app un utente ha due funzionalità: la prima è poter cercare nuovi beacon da segnalare all'amministratore; la seconda è interagire con i propri dispositivi.
 
 \section{Miglioramento dell'esperienza utente}
