@@ -89,6 +89,75 @@ Una volta che si è connessi al server si può proseguire con il login/registraz
 La registrazione non abilita l'utente all'utilizzo di Proximity System, l'utente non potrà far nulla finché l'admin non gli dà i permessi per utilizzare l'app. 
 Con l'app un utente ha due funzionalità: la prima è poter cercare nuovi beacon da segnalare all'amministratore; la seconda è interagire con i propri dispositivi.
 
+\subsubsection{FURPs+}
+Per descrivere i requisiti in maniera più formale utilizzeremo il modello FURPS+\index{FURPS+}\cite{furps} creato da Hewlett-Packard.
+FURPS è un acronimo per dividere i requisiti in categorie e sottocategorie:
+\begin{itemize}
+\item \textbf{F}unctionality(FUN): Capability, Security, Reusability;
+\item \textbf{U}sability(USA): Human Factors, Aesthetics, Consistency, Documentation, Responsiveness;
+\item \textbf{R}eliability(REL): Availability, Failure Extent and Time-Length, Predictability, Accuracy;
+\item \textbf{P}erformance(PER): Speed, Efficiency, Resource Consumption, Throughput, Capacity, Scalability;
+\item \textbf{S}upportability(SUP): Testability, Flexibility, Installability, Localizability;
+\end{itemize}
+Il "+" è stato aggiunto successivamente per estendere l'acronimo ad altri attributi.
+
+Iniziamo descrivendo i requisiti funzionali, ovvero azioni specifiche che il sisteme deve essere in grado di effettuare, senza alcun vincolo.
+Quindi, specificano il comportamento del sistema.
+Una lista di questi verrrà fatta di seguito con un ID e una breve descrizione.
+Ad ogni requisito funzionale verrà asseganto un ID "\textbf{FUN-nn}" dove \textbf{nn} è un numero che identifica il requisito.
+\begin{longtable}{|c|l|}
+% intestazione iniziale
+\hline
+\multicolumn{1}{|c|}{\textbf{ID}} & \multicolumn{1}{c|}{\textbf{Descrizione}} \\
+\endfirsthead
+% intestazione normale
+\multicolumn{2}{l}{\footnotesize\itshape\tablename~\thetable:
+continua dalla pagina precedente} \\
+\hline
+\multicolumn{1}{|c|}{\textbf{ID}} & \multicolumn{1}{c|}{\textbf{Descrizione}} \\
+\endhead
+% piede normale
+\multicolumn{2}{r}{\footnotesize\itshape\tablename~\thetable:
+continua nella prossima pagina} \\
+\endfoot
+% piede finale
+\multicolumn{2}{r}{} \\
+\endlastfoot
+\hline
+FUN-01 & L'app deve permettere di gestire i proprio dispositivi.\\
+\hline
+FUN-02 & L'app deve permettere ai nuovi utenti di registrarsi e ai vecchi di\\
+& effettuare il login.\\
+\hline
+FUN-03 & L'app deve permettere agli utenti di segnalare nuovi beacon\\
+& all'amministratore.\\
+\hline
+FUN-04 & L'app deve permettere agli utenti di ricercare Proximity System\\
+& all'interno della propria LAN.\\
+\hline
+FUN-05 & L'app deve permettere di settare l'indirizzo del server.\\
+\hline
+FUN-06 & L'app deve eseguire automaticamente le operazioni con i beacon\\
+& associati.\\
+\hline
+FUN-07 & La webapp deve permettere il login solo all'amministratore.\\
+\hline
+FUN-08 & La webapp deve la gestione manuale dei GPIO.\\
+\hline
+FUN-09 & La webapp deve permettere la gestione degli utenti: modifica,\\
+& blocco/sblocco.\\
+\hline
+FUN-10 & La webapp deve permettere la gestione dei dispositivi: creazione,\\
+& eliminazione.\\
+\hline
+FUN-11 & La webapp deve permettere di gestire le azioni, cioè di associare\\
+& ai dispositivi: permessi, beacon, modalità di attivazione e input.\\
+\hline
+\caption{Requisiti funzionali.}
+\label{tab:longtable} \\
+\end{longtable} 
+\subsubsection{Use Case}
+
 \section{Miglioramento dell'esperienza utente}
 Dopo una prima stesura del codice e la realizzazione di un primo prototipo,
 abbiamo deciso migliorare l'esperienza utente dando la possibilità al server di inviare notifiche push ai client.

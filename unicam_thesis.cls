@@ -57,6 +57,7 @@
 \RequirePackage{xspace}%
 \RequirePackage{array}%
 \RequirePackage{times}%
+\RequirePackage{longtable}%
 \RequirePackage{fancyhdr}%
 \pagestyle{fancy}%
 
