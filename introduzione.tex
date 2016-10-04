@@ -124,7 +124,7 @@ continua nella prossima pagina} \\
 \multicolumn{2}{r}{} \\
 \endlastfoot
 \hline
-FUN-01 & L'app deve permettere di gestire i proprio dispositivi.\\
+FUN-01 & L'app deve permettere di utilizzare i proprio dispositivi.\\
 \hline
 FUN-02 & L'app deve permettere ai nuovi utenti di registrarsi e ai vecchi di\\
 & effettuare il login.\\
@@ -153,11 +153,72 @@ FUN-10 & La webapp deve permettere la gestione dei dispositivi: creazione,\\
 FUN-11 & La webapp deve permettere di gestire le azioni, cioè di associare\\
 & ai dispositivi: permessi, beacon, modalità di attivazione e input.\\
 \hline
+FUN-12 & Il backend deve fornire i servizi REST per la webapp, per l'app\\
+& e qualsiasi software che potrà essere sviluppato in un secondo\\
+& momento.\\
+\hline
+FUN-13 & Il backend deve poter pilotare dei relè che a loro volta\\
+& comanderanno i vari dispositivi.\\
+\hline
+FUN-14 & Il backend deve deve essere in grado di leggere gli input esterni,\\
+& che per il prototipo saranno simulati da dei bottoni.\\
+\hline
 \caption{Requisiti funzionali.}
-\label{tab:longtable} \\
+\label{tab:req:fun} \\
 \end{longtable} 
-\subsubsection{Use Case}
 
+Passiamo ora ai requisiti non-funzionali, ovvero quelli che descrivono gli attributi del nostro sistema. 
+Ogni requisito è identificato dall'ID "\textbf{XXX-nn}" dove \textbf{XXX} identifica il tipo mentre \textbf{nn} è un numero sequenziale che identifica il requisito.
+\begin{longtable}{|c|l|}
+% intestazione iniziale
+\hline
+\multicolumn{1}{|c|}{\textbf{ID}} & \multicolumn{1}{c|}{\textbf{Descrizione}} \\
+\endfirsthead
+% intestazione normale
+\multicolumn{2}{l}{\footnotesize\itshape\tablename~\thetable:
+continua dalla pagina precedente} \\
+\hline
+\multicolumn{1}{|c|}{\textbf{ID}} & \multicolumn{1}{c|}{\textbf{Descrizione}} \\
+\endhead
+% piede normale
+\multicolumn{2}{r}{\footnotesize\itshape\tablename~\thetable:
+continua nella prossima pagina} \\
+\endfoot
+% piede finale
+\multicolumn{2}{r}{} \\
+\endlastfoot
+\hline
+USA-01 & L'app deve essere semplice da usare.\\
+\hline
+USA-02 & Sia l'app che la webapp devono rispettare criteri di accessibilità\\
+\hline
+PER-01 & Sia l'app che la webapp devono poter essere utilizzate soltanto\\
+& all'interno della propria LAN\\
+\hline
+SUP-01 & Il backend deve supportare l'interazione con software di terze.\\
+& parti.\\
+\hline
+\caption{Requisiti non funzionali.}
+\label{tab:req:non} \\
+\end{longtable} 
+
+\subsubsection{Use Case}
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{Immagini/usecaseApp.png} 
+\caption{Use case dell'app}
+\end{figure}
+
+Dallo use case dell'app possiamo notare come le funzionalità messe a disposizione dell'utente siano le stesse sia se esso è un utente normale che un admin.
+Cambia soltanto il numero delle operazioni messa a disposizione dell'utente che varia a seconda dei propri permessi che ha.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{Immagini/usecaseWebApp.png} 
+\caption{Use case della webapp}
+\end{figure}
+
+Alla webapp, invece, può accedere solamente chi ha i massimi privilegi e da essa può gestire l'intero sistema.
 \section{Miglioramento dell'esperienza utente}
 Dopo una prima stesura del codice e la realizzazione di un primo prototipo,
 abbiamo deciso migliorare l'esperienza utente dando la possibilità al server di inviare notifiche push ai client.
