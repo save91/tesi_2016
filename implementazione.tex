@@ -195,7 +195,7 @@ Troviamo quindi una rotta che ci permette di recuperare l'elenco di tutti i beac
   });
 \end{lstlisting}
 Poi ha bisogno di una seconda rotta per salvare il beacon nel backend.
-Questa volta, però, l'operazione potra essere effettuata soltanto da chi ha già effettuato il login.
+Questa volta, però, l'operazione potrà essere effettuata soltanto da chi ha già effettuato il login.
 \begin{lstlisting}[caption={/webserver/app/routes/beacon.js aggiunta}, style=javaScriptCode]
   //User must be logged to add new beacon
   router.post('/', function(req, res) {
@@ -219,3 +219,22 @@ Questa volta, però, l'operazione potra essere effettuata soltanto da chi ha gi�
     }
   });
 \end{lstlisting}
+
+Come potete osservare dalla documentazione la richiesta dei beacon è fatta in GET mentre l'aggiunta è fatta in POST.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{API/beacon_03.png} 
+\caption{Documentazione per login e registrazione}
+\label{fig:user:login}
+\end{figure}
+
+\section{FUN-04}
+Il quarto requisito prevede la possibilità di ricercare il server di Proximity System all'interno della propria LAN.
+
+\section{FUN-05/07}
+\section{FUN-08}
+\section{FUN-09}
+\section{FUN-10}
+\section{FUN-11}
+\section{FUN-12/14}
