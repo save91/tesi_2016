@@ -101,10 +101,10 @@ FURPS è un acronimo per dividere i requisiti in categorie e sottocategorie:
 \end{itemize}
 Il "+" è stato aggiunto successivamente per estendere l'acronimo ad altri attributi.
 
-Iniziamo descrivendo i requisiti funzionali, ovvero azioni specifiche che il sisteme deve essere in grado di effettuare, senza alcun vincolo.
+I requisiti funzionali descrivono azioni specifiche che il sistema deve essere in grado di effettuare, senza alcun vincolo.
 Quindi, specificano il comportamento del sistema.
-Una lista di questi verrrà fatta di seguito con un ID e una breve descrizione.
-Ad ogni requisito funzionale verrà asseganto un ID "\textbf{FUN-nn}" dove \textbf{nn} è un numero che identifica il requisito.
+Una lista di questi verrà fatta di seguito con un ID e una breve descrizione.
+Ogni ID avrà il seguente formato "\textbf{FUN-nn}" dove \textbf{nn} è un numero che identifica il requisito.
 \begin{longtable}{|c|l|}
 % intestazione iniziale
 \hline
@@ -150,7 +150,7 @@ FUN-09 & La webapp deve permettere la gestione degli utenti: modifica,\\
 FUN-10 & La webapp deve permettere la gestione dei dispositivi: creazione,\\
 & eliminazione.\\
 \hline
-FUN-11 & La webapp deve permettere di gestire le azioni, cioè di associare\\
+FUN-11 & La webapp deve permettere di configurare le azioni, cioè di associare\\
 & ai dispositivi: permessi, beacon, modalità di attivazione e input.\\
 \hline
 FUN-12 & Il backend deve fornire i servizi REST per la webapp, per l'app\\
@@ -195,7 +195,7 @@ USA-02 & Sia l'app che la webapp devono rispettare criteri di accessibilità\\
 PER-01 & Sia l'app che la webapp devono poter essere utilizzate soltanto\\
 & all'interno della propria LAN\\
 \hline
-SUP-01 & Il backend deve supportare l'interazione con software di terze.\\
+SUP-01 & Il backend deve supportare l'interazione con software di terze-\\
 & parti.\\
 \hline
 \caption{Requisiti non funzionali.}
@@ -210,7 +210,7 @@ SUP-01 & Il backend deve supportare l'interazione con software di terze.\\
 \end{figure}
 
 Dallo use case dell'app possiamo notare come le funzionalità messe a disposizione dell'utente siano le stesse sia se esso è un utente normale che un admin.
-Cambia soltanto il numero delle operazioni messa a disposizione dell'utente che varia a seconda dei propri permessi che ha.
+Cambia soltanto il numero delle operazioni messe a disposizione dell'utente che varia a seconda dei permessi.
 
 \begin{figure}[h]
 \centering
@@ -218,7 +218,7 @@ Cambia soltanto il numero delle operazioni messa a disposizione dell'utente che 
 \caption{Use case della webapp}
 \end{figure}
 
-Alla webapp, invece, può accedere solamente chi ha i massimi privilegi e da essa può gestire l'intero sistema.
+Alla webapp, invece, può accedere solamente chi ha i massimi privilegi e da essa si può gestire l'intero sistema.
 \section{Miglioramento dell'esperienza utente}
 Dopo una prima stesura del codice e la realizzazione di un primo prototipo,
 abbiamo deciso migliorare l'esperienza utente dando la possibilità al server di inviare notifiche push ai client.
