@@ -231,10 +231,116 @@ Come potete osservare dalla documentazione la richiesta dei beacon è fatta in G
 
 \section{FUN-04}
 Il quarto requisito prevede la possibilità di ricercare il server di Proximity System all'interno della propria LAN.
+Per fare ciò abbiamo dato la possibilità al client di pingare ogni singolo host all'interno della propria rete con una specifica rotta.
+In modo tale che il client, a seconda se il serve risponde correttamente o meno, sappia se quell'indirizzo è di un server PS.
+La retta in questione è la seguente.
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{API/beacon_03.png} 
+\caption{Documentazione per hello}
+\label{fig:user:login}
+\end{figure}
+Come si può dedurre dalla documentazione, il codice è molti semplice.
+\begin{lstlisting}[caption={/webserver/app/routes/setting.js hello}, style=javaScriptCode]
+  router.get('/hello', function(req, res) {
+    var response = {
+      port: "8000",
+      name: "ProximitySystem",
+      version: "2.0"
+    };
+    res.status(200).send(response);
+  });
+\end{lstlisting}
+Per il momento le informazioni sono statiche per tutti i server, ma in futoro è possibile che queste informazioni saranno personalizzabili.
 
 \section{FUN-05/07}
+I requisiti funzionali dal 05 al 07 non interessano il backend.
+Per questo motivo, si rimanda alla tesi di Marco per maggiori informazioni.
 \section{FUN-08}
-\section{FUN-09}
-\section{FUN-10}
-\section{FUN-11}
-\section{FUN-12/14}
+L'ottavo requisito funzionale prevede il controllo manuale dei GPIO da parte dell'admin.
+Un GPIO(General Purpose Input Output) è un piedino del RaspberryPI che o è configuratoper pilotare un relè oppure per ricevere un imput da un sensore.
+La gestione manuale di essi permette sia di pilotare i relè manualmente, dando la possibilità all'amministratore di spegnere/accendere i dispositivi associati in qualsiasi momento, sia di leggere i relativi input collegati.
+Per questo motivo abbiamo previsto due rotte.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{API/beacon_03.png} 
+\caption{Documentazione per la gestione dei GPIO}
+\label{fig:user:login}
+\end{figure}
+
+Una di lettura, che permette di avere le informazioni di tutti i GPIO, sia di input che di output.
+Ovviamente questa operazione è permessa solo agli admin.
+
+\begin{lstlisting}[caption={/webserver/app/routes/setting.js hello}, style=javaScriptCode]
+  router.get('/', function(req, res) {
+    if(req.user.block || req.user.permission !== 0) {
+      res.status(403).send({'msg':'Forbidden'});
+    } else {
+      GPIO.find(function(err, GPIOs) {
+        if(err) {
+          res.status(500).send({msg: err.errmsg});
+        } else if(GPIOs) {
+          res.status(200).send(GPIOs);
+        }
+      });
+    }
+  });
+\end{lstlisting}
+
+Mentre la seconda di scrittura, ovvero permette di settera i GPIO di output a false o a true.
+
+\begin{lstlisting}[caption={/webserver/app/routes/setting.js hello}, style=javaScriptCode]
+  router.put('/:id/set', function(req, res) {
+    if(req.user.block || req.user.permission !== 0) {
+      res.status(403).send({'msg':'Forbidden'});
+    } else {
+      GPIO.findOne({
+        '_id': req.params.id,
+        'type':'output'
+      }, function(err, gpio) {
+        if(err) {
+          res.status(500).send({'msg': err.msg});
+        } else if(gpio) {
+          if(undefined != req.body.value) {
+            gpio.value = req.body.value;
+          }
+          gpio.save(function (err) {
+            if(err) {
+              res.status(500).send({msg: err.errmsg});
+            } else {
+              pin.setPin(gpio.GPIO, gpio.value, function(err) {
+                if (err) {
+                  res.status(500).send('Oops, Something went wrong! ' + err);
+                } else {
+                  io.emit('update:gpio');
+                  io.emit('update:device');
+                  res.status(200).send(gpio);
+                }
+              }, environment);
+            }
+          });
+        } else {
+          res.status(404).send({'msg': 'Not found'});
+        }
+      });
+    }
+  });
+\end{lstlisting}
+
+Anche in questo caso possiamo notare l'utilizzo delle websocket per notificare a tutti i client che delle informazioni importanti sono state aggiornate.
+Oltre a questo, e alle classiche callback a cascata, possiamo notare che la chiamata setPin accetta un paramatro che si chiama environment.
+Questo parametro indica al sistema se ci troviamo in fase di sviluppo oppure in produzione, ovvero nel Raspberry.
+Nel primo caso la chiamata al GPIO sarà semplicemnte simulata.
+
+\section{FUN-09/10/11}
+I requisiti funzionali 09, 10 e 11 verranno trattati insieme anche se rappresentano la gestione di componenti diverse del sistema(utenti e dispositivi) perché a livello di API la funzioni di cui abbiamo bisogno sono molto simili tra loro. 
+Infatti, le singole operazioni effettueranno la modifica semplice di una singola collection del database.
+In realtà, sono molto simili anche alle rotte viste precedentemente, motivo per cui mostreremo solamente la documentazione delle rotte implementate.
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{API/beacon_03.png} 
+\caption{Documentazione per la gestione dei GPIO}
+\label{fig:user:login}
+\end{figure}
